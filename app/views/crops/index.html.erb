@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Crops</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Start date</th>
+      <th>Transplant</th>
+      <th>Transplant date</th>
+      <th>Location</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @crops.each do |crop| %>
+      <tr>
+        <td><%= crop.name %></td>
+        <td><%= crop.start_date %></td>
+        <td><%= crop.transplant %></td>
+        <td><%= crop.transplant_date %></td>
+        <td><%= crop.location %></td>
+        <td><%= link_to 'Show', crop %></td>
+        <td><%= link_to 'Edit', edit_crop_path(crop) %></td>
+        <td><%= link_to 'Destroy', crop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Crop', new_crop_path %>

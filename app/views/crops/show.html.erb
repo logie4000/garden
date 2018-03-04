@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @crop.name %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @crop.start_date %>
+</p>
+
+<p>
+  <strong>Transplant:</strong>
+  <%= @crop.transplant %>
+</p>
+
+<p>
+  <strong>Transplant date:</strong>
+  <%= @crop.transplant_date %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @crop.location %>
+</p>
+
+<%= link_to 'Edit', edit_crop_path(@crop) %> |
+<%= link_to 'Back', crops_path %>
