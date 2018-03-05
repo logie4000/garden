@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  last_frost: MyString
+  id: 1
+  name: Calendar One 
+  last_frost: 2018-05-13
 
 two:
-  name: MyString
-  last_frost: MyString
+  id: 2
+  name: Calendar Two
+  last_frost: 2018-05-31

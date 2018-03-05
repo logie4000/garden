@@ -18,12 +18,11 @@
 
   <div class="field">
     <%= form.label :calendar_id %>
-    <%= form.text_field :calendar_id, id: :location_calendar_id %>
+    <%= collection_select(:location, :calendar_id, Calendar.all, :id, :name) %>
   </div>
 
   <div class="field">
-    <%= form.label :auto_water %>
-    <%= form.check_box :auto_water, id: :location_auto_water %>
+    <%= form.check_box :auto_water, id: :location_auto_water -%> Automatic watering
   </div>
 
   <div class="actions">

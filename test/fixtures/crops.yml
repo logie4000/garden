@@ -1,15 +1,20 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  start_date: MyString
-  transplant: false
-  transplant_date: MyString
-  location: one
+  name: Tomato 
+  start_date: BeforeTransplant
+  transplant: true
+  transplant_date: BeforeLastFrost
+  location_id: 1
+  start_offset: 7
+  transplant_offset: 0
 
 two:
-  name: MyString
-  start_date: MyString
-  transplant: false
-  transplant_date: MyString
-  location: two
+  name: Basil
+  start_date: BeforeTransplant
+  transplant: true
+  transplant_date: BeforeLastFrost
+  location_id: 1
+  start_offset: 7
+  transplant_offset: 0
+

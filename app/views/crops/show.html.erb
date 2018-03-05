@@ -7,22 +7,27 @@
 
 <p>
   <strong>Start date:</strong>
-  <%= @crop.start_date %>
+  <%= calculate_start_date(@crop) %>
 </p>
 
 <p>
   <strong>Transplant:</strong>
-  <%= @crop.transplant %>
+  <%= @crop.transplant ? "Yes" : "No" %>
 </p>
 
 <p>
   <strong>Transplant date:</strong>
-  <%= @crop.transplant_date %>
+  <%= calculate_transplant_date(@crop) %>
+</p>
+
+<p>
+  <strong>Expected Harvest Date:</strong>
+  <%= calculate_harvest_date(@crop) %>
 </p>
 
 <p>
   <strong>Location:</strong>
-  <%= @crop.location %>
+  <%= location_link(@crop.location) %>
 </p>
 
 <%= link_to 'Edit', edit_crop_path(@crop) %> |

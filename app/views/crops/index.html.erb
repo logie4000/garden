@@ -17,12 +17,11 @@
   <tbody>
     <% @crops.each do |crop| %>
       <tr>
-        <td><%= crop.name %></td>
-        <td><%= crop.start_date %></td>
+        <td><%= link_to(crop.name, crop) %></td>
+        <td><%= calculate_start_date(crop) %></td>
         <td><%= crop.transplant %></td>
-        <td><%= crop.transplant_date %></td>
-        <td><%= crop.location %></td>
-        <td><%= link_to 'Show', crop %></td>
+        <td><%= calculate_transplant_date(crop) %></td>
+        <td><%= location_link(crop.location) %></td>
         <td><%= link_to 'Edit', edit_crop_path(crop) %></td>
         <td><%= link_to 'Destroy', crop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

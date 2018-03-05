@@ -17,23 +17,39 @@
   </div>
 
   <div class="field">
-    <%= form.label :start_date %>
-    <%= form.text_field :start_date, id: :crop_start_date %>
+    <%= form.label :days_to_maturity %>
+    <%= form.text_field :days_to_maturity, id: :crop_days_to_maturity %>
+  </div>
+
+  <b>Starting seeds date</b>
+  <div class="field">
+    <%= form.label :start_offset %>
+    <%= collection_select(:crop, :start_offset_weeks, 0..12, :to_s, :to_s) -%> weeks
   </div>
 
   <div class="field">
-    <%= form.label :transplant %>
-    <%= form.check_box :transplant, id: :crop_transplant %>
+    <%= form.label :start_date %>
+    <%= collection_select(:crop, :start_date, %w(BeforeLastFrost BeforeTransplantDate AfterLastFrost), :to_s, :to_s) %>
+  </div>
+
+  <div class="field">
+    <%= form.check_box :transplant, id: :crop_transplant -%> Transplant
+  </div>
+
+  <b>Transplanting date</b>
+  <div class="field">
+    <%= form.label :transplant_offset %>
+    <%= collection_select(:crop, :transplant_offset_weeks, 0..12, :to_s, :to_s) -%> weeks
   </div>
 
   <div class="field">
     <%= form.label :transplant_date %>
-    <%= form.text_field :transplant_date, id: :crop_transplant_date %>
+    <%= collection_select(:crop, :transplant_date, %w(BeforeLastFrost AfterLastFrost), :to_s, :to_s) %>
   </div>
 
   <div class="field">
     <%= form.label :location_id %>
-    <%= form.text_field :location_id, id: :crop_location_id %>
+    <%= collection_select(:crop, :location_id, Location.all, :id, :name) %>
   </div>
 
   <div class="actions">

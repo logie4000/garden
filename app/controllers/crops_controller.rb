@@ -24,6 +24,14 @@ class CropsController < ApplicationController
   # POST /crops
   # POST /crops.json
   def create
+    if params[:crop][:start_offset_weeks]
+      params[:crop][:start_offset] = params[:crop][:start_offset_weeks].to_i * 7
+    end
+
+    if params[:crop][:transplant_offset_weeks]
+      params[:crop][:transplant_offset] = params[:crop][:transplant_offset_weeks].to_i * 7
+    end
+
     @crop = Crop.new(crop_params)
 
     respond_to do |format|
@@ -40,6 +48,15 @@ class CropsController < ApplicationController
   # PATCH/PUT /crops/1
   # PATCH/PUT /crops/1.json
   def update
+    if params[:crop][:start_offset_weeks]
+      params[:crop][:start_offset] = params[:crop][:start_offset_weeks].to_i * 7
+      Rails.logger.debug "Updating start_offset with #{params.inspect}"
+    end
+
+    if params[:crop][:transplant_offset_weeks]
+      params[:crop][:transplant_offset] = params[:crop][:transplant_offset_weeks].to_i * 7
+    end
+
     respond_to do |format|
       if @crop.update(crop_params)
         format.html { redirect_to @crop, notice: 'Crop was successfully updated.' }
@@ -69,6 +86,6 @@ class CropsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def crop_params
-      params.require(:crop).permit(:name, :start_date, :transplant, :transplant_date, :location_id)
+      params.require(:crop).permit(:name, :days_to_maturity, :start_offset, :start_date, :transplant, :transplant_offset, :transplant_date, :location_id)
     end
 end
