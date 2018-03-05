@@ -4,7 +4,7 @@ class CropsController < ApplicationController
   # GET /crops
   # GET /crops.json
   def index
-    @crops = Crop.all
+    @crops = Crop.all.sort_by {|crop|  [crop.get_start_datetime, crop.name]}
   end
 
   # GET /crops/1
