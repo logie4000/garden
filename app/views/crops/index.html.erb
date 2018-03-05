@@ -25,7 +25,9 @@
         <td><%= calculate_harvest_date(crop) %></td>
         <td><%= location_link(crop.location) %></td>
         <td><%= link_to 'Edit', edit_crop_path(crop) %></td>
-        <td><%= link_to 'Destroy', crop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if (@current_user && @current_user.is_admin?) %>
+          <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
