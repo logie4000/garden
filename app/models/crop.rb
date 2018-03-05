@@ -37,6 +37,8 @@ class Crop < ApplicationRecord
      d_day = get_transplant_datetime
     end
 
+    offset = self.days_to_maturity || 0
+
     h_day = d_day + self.days_to_maturity
 
     return h_day

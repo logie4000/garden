@@ -1,15 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+tomato:
   name: Tomato 
   start_date: BeforeTransplant
   transplant: true
-  transplant_date: BeforeLastFrost
+  transplant_date: AfterLastFrost
   location_id: 1
-  start_offset: 7
-  transplant_offset: 0
+  start_offset: 21
+  transplant_offset: 7
+  days_to_maturity: 55
 
-two:
+basil:
   name: Basil
   start_date: BeforeTransplant
   transplant: true
@@ -17,4 +18,15 @@ two:
   location_id: 1
   start_offset: 7
   transplant_offset: 0
+  days_to_maturity: 55
+
+radish:
+  name: Radish
+  start_date: BeforeLastFrost
+  transplant: false
+  transplant_date: BeforeLastFrost
+  location_id: 1
+  start_offset: 21
+  transplant_offset: 0
+  days_to_maturity: 55
 

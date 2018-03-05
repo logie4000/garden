@@ -32,6 +32,10 @@ class CropsController < ApplicationController
       params[:crop][:transplant_offset] = params[:crop][:transplant_offset_weeks].to_i * 7
     end
 
+    if params[:crop][:transplant]
+      params[:crop][:start_date] = TEXT_BEFORE_TRANSPLANT
+    end
+
     @crop = Crop.new(crop_params)
 
     respond_to do |format|
@@ -55,6 +59,10 @@ class CropsController < ApplicationController
 
     if params[:crop][:transplant_offset_weeks]
       params[:crop][:transplant_offset] = params[:crop][:transplant_offset_weeks].to_i * 7
+    end
+
+    if params[:crop][:transplant]
+      params[:crop][:start_date] = TEXT_BEFORE_TRANSPLANT
     end
 
     respond_to do |format|

@@ -29,7 +29,7 @@
 
   <div class="field">
     <%= form.label :start_date %>
-    <%= collection_select(:crop, :start_date, %w(BeforeLastFrost BeforeTransplantDate AfterLastFrost), :to_s, :to_s) %>
+    <%= collection_select(:crop, :start_date, [TEXT_BEFORE_LAST_FROST, TEXT_BEFORE_TRANSPLANT, TEXT_AFTER_LAST_FROST], :to_s, :to_s) %>
   </div>
 
   <div class="field">
@@ -44,7 +44,7 @@
 
   <div class="field">
     <%= form.label :transplant_date %>
-    <%= collection_select(:crop, :transplant_date, %w(BeforeLastFrost AfterLastFrost), :to_s, :to_s) %>
+    <%= collection_select(:crop, :transplant_date, [TEXT_BEFORE_LAST_FROST, TEXT_AFTER_LAST_FROST], :to_s, :to_s) %>
   </div>
 
   <div class="field">

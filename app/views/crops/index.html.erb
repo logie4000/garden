@@ -9,6 +9,7 @@
       <th>Start date</th>
       <th>Transplant</th>
       <th>Transplant date</th>
+      <th>Expected Harvest</th>
       <th>Location</th>
       <th colspan="3"></th>
     </tr>
@@ -21,6 +22,7 @@
         <td><%= calculate_start_date(crop) %></td>
         <td><%= crop.transplant %></td>
         <td><%= calculate_transplant_date(crop) %></td>
+        <td><%= calculate_harvest_date(crop) %></td>
         <td><%= location_link(crop.location) %></td>
         <td><%= link_to 'Edit', edit_crop_path(crop) %></td>
         <td><%= link_to 'Destroy', crop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
