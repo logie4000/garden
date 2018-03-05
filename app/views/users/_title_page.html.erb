@@ -1,9 +1,9 @@
   <div class="title-text">
-  <h1>Welcome to Bill's Galley</h1></td>
+  <h1><%= h(APPLICATION_TITLE) %></h1></td>
   </div>
-  <div class="title-image"><%= image_tag( 'ship_01.png', :width => 425, :height => 300 ) %></div>
+  <div class="title-image"><%= image_tag( 'sm_logo_256.png', :width => 256, :height => 256 ) %></div>
 
-  <div class="title-links"><%= link_to "Recipes", recipes_path %> |
+  <div class="title-links"><%= link_to "Enter Site", crops_path %> |
   <% if session[:user_id] %>
     <%= link_to "Logout", logout_users_path %>
   <% else %>

@@ -88,6 +88,12 @@ class CropsController < ApplicationController
     end
   end
 
+  def welcome
+  end
+
+  def about
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_crop

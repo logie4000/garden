@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Garden</title>
+    <title><%= APPLICATION_TITLE -%></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,32 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div id="header">
+      <span id="header-icon"><%= image_tag "sm_logo_32.png" -%></span>
+      <span id="header-title"><%= APPLICATION_TITLE -%></span>
+
+
+    <span id="header-links">
+      <% if session[:user_id] %>
+        <% user = User.find(session[:user_id]) %>
+        <%= "Welcome, #{user.first_name} #{user.last_name}" %>
+      <% end %> | 
+
+      <%= link_to 'About', about_crops_path %> | 
+      <%= link_to 'Crops', crops_path %> |
+      <%= link_to 'Locations', locations_path %> |
+      <%= link_to 'Calendars', calendars_path %> |
+ 
+      <% if session[:user_id] %>
+        <%= link_to 'Logout', logout_users_path %> | <%= link_to 'Profile', user_path(User.find(session[:user_id])) %>
+      <% else %>
+        <%= link_to 'Login', login_users_path %> | <%= link_to 'Register', register_users_path %>
+      <% end %> |
+      </span>
+    </div>
+
+    <div id="content">
+      <%= yield %>
+    </div>
   </body>
 </html>
