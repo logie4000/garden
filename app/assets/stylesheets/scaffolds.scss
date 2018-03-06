@@ -46,6 +46,32 @@ div {
   }
 }
 
+div.planningBar div.barIndexB {
+  height: 10px;
+  float: left;
+  width: 2px;
+  background-image: url(/images/metre/v3b.gif);
+}
+
+div.planningBar div.barIndexLeft {
+  background: transparent url(/images/metre/vbg3.gif) repeat-x scroll left center;
+  height: 10px;
+  float: left;
+}
+
+div.planningBar div.barIndexRight {
+  background: transparent url(/images/metre/vbg3.gif) repeat-x scroll left center;
+  height: 10px;
+  float: left;
+}
+
+div.planningBar div.barIndexE {
+  height: 10px;
+  float: left;
+  width: 2px;
+  background-image: url(/images/metre/v3e.gif);
+}
+
 #notice {
   color: green;
 }

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Graphical Crops</h1>
+<b><%= link_to("List", crops_path) %></b>
+
+<% scale = 5 %>
+
+ <table>
+    <% @crops.each do |crop| %>
+      <% right_width = crop.days_to_maturity * scale %>
+      <% left_width = seeding_offset(crop) * scale %>
+
+      <% growing_season_start = DateTime.new(2018, 3, 1) %>
+      <% padding = (crop.get_start_datetime() - growing_season_start).to_i * scale %>
+      <% total_width = right_width + left_width + padding %>
+
+      <tr><td>
+      <%= render :partial => "shared/planningBar", :locals => {:total_width => total_width, :padding => padding, :left_width => left_width, :right_width => right_width, :title => crop.name, :hover_text => "#{pluralize(crop.days_to_maturity, 'day')} to maturity" } %>
+      </td></tr>
+    <% end %>
+  </table>
+<br>
+
+<%= link_to 'New Crop', new_crop_path %>

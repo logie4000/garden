@@ -1,11 +1,6 @@
 Rails.application.routes.draw do
   resources :locations
   resources :calendars
-  resources :crops do
-    collection do
-      get :about
-    end
-  end
 
   resources :users, path_names: { new: 'register' } do
     collection do
@@ -22,6 +17,7 @@ Rails.application.routes.draw do
   resources :crops do
     collection do
       get :about
+      get :graphical
     end
 
     member do

@@ -22,4 +22,12 @@ module CropsHelper
     return "#{crop.days_to_maturity} days after #{crop.transplant ?  "transplant" : "direct seeding"} (#{ crop.get_harvest_datetime().to_date() })"
   end
 
+  def seeding_offset(crop)
+    dt_start = crop.get_start_datetime
+    dt_harvest = crop.get_harvest_datetime()
+
+    total_days = (dt_harvest - dt_start).to_i
+    
+    return total_days - crop.days_to_maturity
+  end
 end
