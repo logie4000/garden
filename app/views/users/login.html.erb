@@ -12,3 +12,4 @@ Please log in or <%= link_to "register", register_users_path %> as a new user:
     <% end -%>
 <% end %>
 
+<%= render :partial => "github_login", :locals => { :client_id => CLIENT_ID } %>
