@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_action :authorize, except: [:register, :login, :create, :welcome, :authenticate]
   before_action :authorize_as_admin, only: [:destroy]
 
+  require 'rest-client'
+  
   def welcome
     render :layout => false
   end
@@ -129,6 +131,40 @@ class UsersController < ApplicationController
     end
   end
 
+  def authorize
+    session_code = params[:code]
+    
+    result = RestClient.post('https://github.com/login/oauth/access_token',
+               {:client_id => CLIENT_ID,
+                :client_secret => CLIENT_SECRET,
+                :code => session_code},
+                :accept => :json)
+    
+    access_token = JSON.parse(result)['access_token']
+    
+    scopes = JSON.parse(result)['scope'].split(',')
+    has_user_email_scope = scopes.include? 'user:email'
+    
+    auth_result = JSON.parse(RestClient.get('https://api.github.com/user',
+                                        {:params => {:access_token => access_token}}))
+
+    # if the user authorized it, fetch private emails
+    if has_user_email_scope
+      auth_result['private_emails'] =
+      JSON.parse(RestClient.get('https://api.github.com/user/emails',
+                              {:params => {:access_token => access_token}}))
+    end
+    
+    user = User.find_by_username(auth_result['email'])
+    if (user)
+      reset_session
+      session[:user_id] = user.id      
+    else
+      user = User.new(:username => username)
+      user.password = rand.to_s
+      user.save!
+    end
+  end
   
   def logout
     session[:user_id] = nil
