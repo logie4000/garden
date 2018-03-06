@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       get :login
       get :list
       get :logout
-      get :authorize
+      get :oauth
     end
   end
 

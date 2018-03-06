@@ -131,7 +131,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def authorize
+  def oauth
     session_code = params[:code]
     
     result = RestClient.post('https://github.com/login/oauth/access_token',
