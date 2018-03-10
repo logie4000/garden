@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:index, :show, :edit, :update, :destroy]
-  before_action :authorize, except: [:register, :login, :create, :welcome, :authenticate]
+  before_action :authorize, except: [:oauth, :logout, :register, :login, :create, :welcome, :authenticate]
   before_action :authorize_as_admin, only: [:destroy]
 
   require 'rest-client'
@@ -132,15 +132,38 @@ class UsersController < ApplicationController
   end
 
   def oauth
-    session_code = params[:code]
-    
-    result = RestClient.post('https://github.com/login/oauth/access_token',
-               {:client_id => CLIENT_ID,
-                :client_secret => CLIENT_SECRET,
-                :code => session_code},
-                :accept => :json)
-    
-    access_token = JSON.parse(result)['access_token']
+    session_code = params[:code].to_s
+    access_token = "yaddayaddayadda"
+    client_id = CLIENT_ID
+    client_secret = CLIENT_SECRET
+
+    client_id.chomp!
+    client_secret.chomp!
+ 
+    Rails.logger.debug "Posting session_code = #{session_code} to github..." 
+    Rails.logger.debug "CLIENT_ID = #{CLIENT_ID}"
+    Rails.logger.debug "CLIENT_SECRET = #{CLIENT_SECRET}"
+  begin
+    request = RestClient::Request.new(:method => :post,
+                :url => 'https://github.com/login/oauth/access_token',
+                :payload => {:client_id => client_id,
+                    :client_secret => client_secret,
+                    :code => session_code,
+                    :redirect_uri => 'https://www.teapothill.org/garden_planner/users/oauth',
+                    :state => OAUTH_STATE}.to_json,
+                :headers => {:content_type => :json, :accept => :json})
+    result = request.execute
+    Rails.logger.debug "Result: #{result.inspect}"
+    response_json = JSON.parse(result)
+    Rails.logger.debug "Result: #{response_json.inspect}"
+    access_token =  JSON.parse(result)['access_token']
+
+  rescue StandardError => e
+    Rails.logger.debug "Exception caught: #{e.to_s} (e.class.name)\n"
+    Rails.logger.debug "Response: #{e.response.inspect}" if (e.response)
+  end
+
+    Rails.logger.debug "Received access_token: #{access_token}"
     
     scopes = JSON.parse(result)['scope'].split(',')
     has_user_email_scope = scopes.include? 'user:email'
@@ -148,22 +171,51 @@ class UsersController < ApplicationController
     auth_result = JSON.parse(RestClient.get('https://api.github.com/user',
                                         {:params => {:access_token => access_token}}))
 
+
     # if the user authorized it, fetch private emails
     if has_user_email_scope
       auth_result['private_emails'] =
       JSON.parse(RestClient.get('https://api.github.com/user/emails',
                               {:params => {:access_token => access_token}}))
-    end
-    
-    user = User.find_by_username(auth_result['email'])
-    if (user)
-      reset_session
-      session[:user_id] = user.id      
     else
-      user = User.new(:username => username)
-      user.password = rand.to_s
-      user.save!
+      Rails.logger.debug "User does not have email scope. Scopes: #{scopes.inspect}"
     end
+
+    Rails.logger.debug "Auth_result: #{auth_result.inspect}"
+
+    email = auth_result['email']
+    if (email.nil?)
+      email = auth_result['private_emails'][0]['email']
+    end
+
+    if (email.blank?)
+      Rails.logger.debug "No email provided from scopes!"
+    else
+      user = User.find_by_username(email)
+      if (user)
+        reset_session
+        session[:user_id] = user.id      
+      else
+        user = User.new(:username => email)
+        name = auth_result['name'] || auth_result['login']
+        user.first_name = name if name
+        user.password = rand.to_s
+        user.save!
+        
+        session[:user_id] = user.id
+      end
+    end
+
+    respond_to do |type|
+      type.html {
+        if not session[:user_id]
+          flash[:notice] = "Invalid username or password."
+          redirect_to :action => 'login'
+        else
+          redirect_to :action => 'welcome'
+        end
+      }
+    end    
   end
   
   def logout
