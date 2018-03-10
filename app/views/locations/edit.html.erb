@@ -1,4 +1,4 @@
-<h1>Editing Location</h1>
+<%= render :partial => 'shared/location_toolbar', :locals => {:location => @location, :mode =>'edit'} %>
 
 <%= render 'form', location: @location %>
 

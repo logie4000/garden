@@ -106,6 +106,6 @@ class CropsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def crop_params
-      params.require(:crop).permit(:name, :days_to_maturity, :start_offset, :start_date, :transplant, :transplant_offset, :transplant_date, :location_id)
+      params.require(:crop).permit(:name, :days_to_maturity, :start_offset, :start_date, :transplant, :transplant_offset, :transplant_date, :location_id, :notes, :image)
     end
 end

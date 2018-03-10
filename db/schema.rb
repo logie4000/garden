@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180305173719) do
+ActiveRecord::Schema.define(version: 20180310174407) do
 
   create_table "calendars", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 20180305173719) do
     t.integer "days_to_maturity", default: 0
     t.integer "start_offset", default: 0
     t.integer "transplant_offset", default: 0
+    t.text "notes"
+    t.string "image", default: ""
     t.index ["location_id"], name: "index_crops_on_location_id"
   end
 
@@ -39,6 +41,7 @@ ActiveRecord::Schema.define(version: 20180305173719) do
     t.boolean "auto_water"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image", default: ""
     t.index ["calendar_id"], name: "index_locations_on_calendar_id"
   end
 

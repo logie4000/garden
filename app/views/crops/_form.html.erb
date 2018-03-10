@@ -52,6 +52,16 @@
     <%= collection_select(:crop, :location_id, Location.all, :id, :name) %>
   </div>
 
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </div>
+
+  <div>
+    <%= form.label :notes %>
+    <%= form.text_area :notes, id: :notes %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

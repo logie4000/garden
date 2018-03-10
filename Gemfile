@@ -12,7 +12,12 @@ gem 'rails', '~> 5.1.4'
 gem 'sqlite3'
 gem "mysql2"
 
+# Rest client used for REST api support, e.g. Github auth
 gem 'rest-client'
+
+# Uploader support
+gem 'carrierwave', '~> 0.10.0'
+gem 'mini_magick', '~> 4.3'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.7'

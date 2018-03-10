@@ -1,0 +1,11 @@
+<div id="toolbar">
+<% if mode == "edit" %>
+ <%= link_to 'Show', location %> |
+<% elsif mode == 'show' %>
+ <%= link_to 'Edit', edit_location_path(location) %> |
+<% end %>
+
+ <%= link_to 'Locations List', locations_path %>
+
+</div>
+

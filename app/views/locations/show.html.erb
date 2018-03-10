@@ -1,5 +1,10 @@
-<p id="notice"><%= notice %></p>
+<% unless notice.blank? %>
+  <p id="notice"><%= notice %></p>
+<% end %>
 
+<%= render :partial => 'shared/location_toolbar', :locals => {:location => @location, :mode => 'show'} %>
+
+<div id="item_details">
 <p>
   <strong>Name:</strong>
   <%= @location.name %>
@@ -14,6 +19,8 @@
   <strong>Auto water:</strong>
   <%= @location.auto_water %>
 </p>
+</div>
+<div id="item_image">
+  <%= image_tag @location.image.normal.url %>
+</div>
 
-<%= link_to 'Edit', edit_location_path(@location) %> |
-<%= link_to 'Back', locations_path %>

@@ -1,5 +1,7 @@
 class Crop < ApplicationRecord
   belongs_to :location
+  mount_uploader :image, ImageUploader
+  validate :image_size_validation
 
   def get_start_datetime
     d_day = self.location.get_last_frost()
@@ -60,4 +62,8 @@ class Crop < ApplicationRecord
     self.transplant_offset = weeks * 7
   end
 
+private
+  def image_size_validation
+    errors[:image] << "should be less than 500KB" if image.size > 0.5.megabytes
+  end
 end
