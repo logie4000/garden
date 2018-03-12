@@ -1,12 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+garden_boxes:
   id: 1
   name: Garden Boxes 
   calendar_id: 1 
   auto_water: false
 
-two:
+front_beds:
   id: 2
   name: Front Beds
   calendar_id: 1

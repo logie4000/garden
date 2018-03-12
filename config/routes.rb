@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :locations
   resources :calendars
+  resources :seasons
 
   resources :users, path_names: { new: 'register' } do
     collection do

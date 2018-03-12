@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-
+<div id="item_details">
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name, id: :crop_name %>
@@ -24,7 +24,7 @@
   <b>Starting seeds date</b>
   <div class="field">
     <%= form.label :start_offset %>
-    <%= collection_select(:crop, :start_offset_weeks, 0..12, :to_s, :to_s) -%> weeks
+    <%= collection_select(:crop, :start_offset_weeks, 0..16, :to_s, :to_s) -%> weeks
   </div>
 
   <div class="field">
@@ -54,7 +54,7 @@
 
   <div class="field">
     <%= form.label :image %>
-    <%= form.file_field :image %>
+    <%= form.file_field :image %><br>
   </div>
 
   <div>
@@ -66,3 +66,8 @@
     <%= form.submit %>
   </div>
 <% end %>
+</div>
+
+<%= render :partial => "shared/item_image", :locals => {:obj => crop} %>
+
+

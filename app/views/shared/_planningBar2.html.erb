@@ -1,0 +1,25 @@
+<% bar_height = 15 %>
+<% day_width = 7 %>
+<% gap_width = 2 %>
+<% start_date ||= DateTime.parse(DEFAULT_LAST_FROST) %>
+<% right_color ||= "#997d00" %>
+<% left_color ||= "#48ec00" %>
+
+<div class='planningBar' style='<%= "height: #{bar_height}px;width: #{total_width}" -%>' >
+<div style='text-align:right;padding-right:7px;font-size:10px;float:left;<%= "width:#{125 + (padding * day_width)}px" %>'><%= h(title) -%></div>
+  <% left_width.times do |d| %>
+    <% break if (d + padding) > total_width %>
+    <% day_date = start_date + d %>
+    <div class='barIndexLeft' title='<%= h(day_date.strftime("%Y-%m-%d")) %>' style='<%= "background-color: #{left_color};width:#{day_width - gap_width}px;height:#{bar_height + 3}px" -%>'></div>
+    <div class='barIndexLeft' style='<%= "background-color: #ffffff;width:#{gap_width}px;height:#{bar_height + 3}px" -%>'></div>
+  <% end %>
+
+  <% right_width.times do |d| %>
+    <% break if ((d + left_width + padding) > total_width) %>
+    <% day_date = start_date + left_width + d %>
+    <div class='barIndexLeft' title='<%= h(day_date.strftime("%Y-%m-%d")) %>' style='<%= "background-color: #{right_color};width:#{day_width - gap_width}px;height:#{bar_height + 3}px" -%>'></div>
+    <div class='barIndexLeft' style='<%= "background-color: #ffffff;width:#{gap_width}px;height:#{bar_height + 3}px" -%>'></div>
+  <% end %>
+
+<div style='clear: both'></div>
+</div>

@@ -39,9 +39,20 @@
   <strong>Planting Notes:</strong>
   <%= @crop.notes %>
 </p>
+
+<% unless @crop.seasons.empty? %>
+    <strong>Growing Seasons</strong>
+    <% @crop.seasons.each do |season| %>
+      <% @season = season if (season.year == Date.today.year.to_s) %>
+      <%= render :partial => "season_details", :locals => {:season => season} %>
+    <% end %>
+<% end %>
+<% if (@season) %>
+  <%= link_to 'Edit current growing season', :controller => 'seasons', :action => 'edit', :id => @season.id %>
+<% else %>
+  <%= link_to 'Create New growing season', :controller => 'seasons', :action => 'new', :crop_id => @crop.id %>
+<% end %>
 </div>
 
-<div id="item_image">
-<%= image_tag @crop.image.normal.url %>
-</div>
 
+<%= render :partial => "shared/item_image", :locals => {:obj => @crop} %>

@@ -3,9 +3,9 @@
 one:
   id: 1
   name: Calendar One 
-  last_frost: 2018-05-13
+  last_frost: <%= DateTime.parse(DEFAULT_LAST_FROST) %>
 
 two:
   id: 2
   name: Calendar Two
-  last_frost: 2018-05-31
+  last_frost: <%= DateTime.parse(DEFAULT_LAST_FROST) %>

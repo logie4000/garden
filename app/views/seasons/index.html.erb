@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Growing Seasons</h1>
+
+    <% Season.distinct.pluck(:year).each do |year| %>
+      <%= render :partial => "year_index", :locals => {:year => year} %>
+    <% end %>
+
+<br>
+

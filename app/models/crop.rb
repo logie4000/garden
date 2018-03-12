@@ -1,7 +1,11 @@
 class Crop < ApplicationRecord
   belongs_to :location
+  has_many :seasons
+
   mount_uploader :image, ImageUploader
   validate :image_size_validation
+
+  accepts_nested_attributes_for :seasons, :reject_if => proc {|attributes| attributes[:year].blank?}
 
   def get_start_datetime
     d_day = self.location.get_last_frost()

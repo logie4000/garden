@@ -4,18 +4,14 @@
 <b><%= link_to("List", crops_path) %></b>
 
 <% scale = 5 %>
+<% growing_season_start = DateTime.new(2018, 3, 1) %>
+<% growing_season_end = DateTime.new(2018, 8, 31) %>
 
  <table>
     <% @crops.each do |crop| %>
-      <% right_width = crop.days_to_maturity * scale %>
-      <% left_width = seeding_offset(crop) * scale %>
-
-      <% growing_season_start = DateTime.new(2018, 3, 1) %>
-      <% padding = (crop.get_start_datetime() - growing_season_start).to_i * scale %>
-      <% total_width = right_width + left_width + padding %>
-
+      <% next if crop.get_start_datetime() > growing_season_end %>
       <tr><td>
-      <%= render :partial => "shared/planningBar", :locals => {:total_width => total_width, :padding => padding, :left_width => left_width, :right_width => right_width, :title => crop.name, :hover_text => "#{pluralize(crop.days_to_maturity, 'day')} to maturity" } %>
+        <%= render :partial => "growth_chart", :locals => {:crop => crop, :growing_season_start => growing_season_start, :growing_season_end => growing_season_end} %>
       </td></tr>
     <% end %>
   </table>

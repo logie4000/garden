@@ -7,3 +7,5 @@ TEXT_AFTER_LAST_FROST = "After last frost"
 CLIENT_ID = begin IO.read("/var/www/.github_clientid") rescue "" end
 CLIENT_SECRET = begin IO.read("/var/www/.github_secret") rescue "" end
 OAUTH_STATE = "12345"
+
+DEFAULT_LAST_FROST = "2018-05-13"

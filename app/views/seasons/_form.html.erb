@@ -1,0 +1,43 @@
+<%= form_with(model: season, local: true) do |form| %>
+  <% if season.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(season.errors.count, "error") %> prohibited this season from being saved:</h2>
+
+      <ul>
+      <% season.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h2><%= h(season.year) %></h2>
+
+  <div class="field">
+    <%= form.label :start_date %>
+    <%= form.text_field :start_date, id: :start_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :transplant_date %>
+    <%= form.text_field :transplant_date, id: :transplant_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :harvest_date %>
+    <%= form.text_field :harvest_date, id: :harvest_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_area :notes, id: :notes %>
+  </div>
+
+
+  <%= form.hidden_field :crop_id %>
+  <%= form.hidden_field :year %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

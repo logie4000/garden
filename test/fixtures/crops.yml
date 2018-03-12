@@ -2,9 +2,9 @@
 
 tomato:
   name: Tomato 
-  start_date: BeforeTransplant
+  start_date: <%= TEXT_BEFORE_TRANSPLANT %>
   transplant: true
-  transplant_date: AfterLastFrost
+  transplant_date: <%= TEXT_AFTER_LAST_FROST %>
   location_id: 1
   start_offset: 21
   transplant_offset: 7
@@ -12,9 +12,9 @@ tomato:
 
 basil:
   name: Basil
-  start_date: BeforeTransplant
+  start_date: <%= TEXT_BEFORE_TRANSPLANT %>
   transplant: true
-  transplant_date: BeforeLastFrost
+  transplant_date: <%= TEXT_BEFORE_LAST_FROST %>
   location_id: 1
   start_offset: 7
   transplant_offset: 0
@@ -22,9 +22,9 @@ basil:
 
 radish:
   name: Radish
-  start_date: BeforeLastFrost
+  start_date: <%= TEXT_BEFORE_LAST_FROST %>
   transplant: false
-  transplant_date: BeforeLastFrost
+  transplant_date: <%= TEXT_BEFORE_LAST_FROST %>
   location_id: 1
   start_offset: 21
   transplant_offset: 0

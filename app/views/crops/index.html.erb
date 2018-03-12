@@ -1,14 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Crops</h1>
-<b><%= link_to("Graphical", graphical_crops_path) %></b>
+<b><%= link_to("Graphical", graphical_crops_path) %> | <%= link_to 'New Crop', new_crop_path %></b>
 <table>
   <thead>
     <tr>
       <th>&nbsp;</th>
       <th>Name</th>
       <th>Start date</th>
-      <th>Transplant</th>
       <th>Transplant date</th>
       <th>Expected Harvest</th>
       <th>Location</th>
@@ -18,13 +17,20 @@
 
   <tbody>
     <% @crops.each do |crop| %>
+      <% season = nil %>
+      <% season = crop.seasons.this_year.first %>
       <tr>
         <td><%= link_to(image_tag(crop.image.thumb.url), crop) %></td>
         <td><%= link_to(crop.name, crop) %></td>
-        <td><%= calculate_start_date(crop) %></td>
-        <td><%= crop.transplant %></td>
-        <td><%= calculate_transplant_date(crop) %></td>
-        <td><%= calculate_harvest_date(crop) %></td>
+        <td><%= calculate_start_date(crop) %><br>
+          <%= link_to("Actual: #{season.start_date}", season) if (season && season.start_date) %>
+        </td>
+        <td><%= calculate_transplant_date(crop) if (crop.transplant) %><br>
+          <%= link_to("Actual: #{season.transplant_date}", season) if (season && !season.transplant_date.blank?) %>
+        </td>
+        <td><%= calculate_harvest_date(crop) %><br>
+          <%= link_to("Actual: #{season.harvest_date}", season) if (season && !season.harvest_date.blank?) %>
+        </td>
         <td><%= location_link(crop.location) %></td>
         <td><%= link_to 'Edit', edit_crop_path(crop) %></td>
         <% if (@current_user && @current_user.is_admin?) %>
@@ -37,4 +43,3 @@
 
 <br>
 
-<%= link_to 'New Crop', new_crop_path %>

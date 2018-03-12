@@ -1,7 +1,7 @@
 class CropsController < ApplicationController
   before_action :authorize, only: [:edit, :update]
   before_action :authorize_as_admin, only: [:destroy]
-  before_action :set_crop, only: [:show, :edit, :update, :destroy]
+  before_action :set_crop, only: [:show, :edit, :update, :destroy, :add_new_season]
 
   # GET /crops
   # GET /crops.json
@@ -34,7 +34,7 @@ class CropsController < ApplicationController
       params[:crop][:transplant_offset] = params[:crop][:transplant_offset_weeks].to_i * 7
     end
 
-    if params[:crop][:transplant]
+    if params[:crop][:transplant] =~ /true/i
       params[:crop][:start_date] = TEXT_BEFORE_TRANSPLANT
     end
 
@@ -63,7 +63,7 @@ class CropsController < ApplicationController
       params[:crop][:transplant_offset] = params[:crop][:transplant_offset_weeks].to_i * 7
     end
 
-    if params[:crop][:transplant]
+    if params[:crop][:transplant] =~ /true/i
       params[:crop][:start_date] = TEXT_BEFORE_TRANSPLANT
     end
 
@@ -106,6 +106,6 @@ class CropsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def crop_params
-      params.require(:crop).permit(:name, :days_to_maturity, :start_offset, :start_date, :transplant, :transplant_offset, :transplant_date, :location_id, :notes, :image)
+      params.require(:crop).permit(:name, :days_to_maturity, :start_offset, :start_date, :transplant, :transplant_offset, :transplant_date, :location_id, :notes, :image, season_attributes: [:id, :year, :start_date, :transplant_date, :harvest_date, :notes] )
     end
 end
