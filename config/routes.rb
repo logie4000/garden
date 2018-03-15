@@ -27,6 +27,15 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      resources :crops
+      resources :calendars
+      resources :locations
+      resources :users
+    end
+  end
+
   get '/about', to: redirect('crops/about')
   get '/login', to: redirect('users/login')
   root to: 'users#welcome'
