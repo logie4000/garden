@@ -52,22 +52,20 @@
     <%= collection_select(:crop, :location_id, Location.all, :id, :name) %>
   </div>
 
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.file_field :image %><br>
-  </div>
-
   <div>
     <%= form.label :notes %>
     <%= form.text_area :notes, id: :notes %>
   </div>
-
   <div class="actions">
     <%= form.submit %>
   </div>
-<% end %>
 </div>
 
-<%= render :partial => "shared/item_image", :locals => {:obj => crop} %>
-
-
+<div id="item_image">
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image %><br>
+  </div>
+  <%= render :partial => "shared/item_image", :locals => {:obj => crop} %>
+</div>
+<% end %>

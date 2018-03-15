@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :password_presence, :presence => true
   validates :password, :confirmation => true
   #validates :password_confirmation, :presence => true, unless: :password.nil?
+  validates :api_key, :uniqueness => true
 
   def self.authenticate(username, password)
     # Return nil if username or password are not provided
@@ -36,7 +37,15 @@ class User < ApplicationRecord
     user.password = password
     user.save!
   end
-      
+
+  def self.generate_api_key
+    while true
+      now = Time.now
+      token = Digest::SHA256.hexdigest now.tv_nsec.to_s + rand.to_s
+      return token unless User.exists?(:api_key => '#{token}')
+    end    
+  end
+ 
   # Password is a virtual attribute
   def password
     @password

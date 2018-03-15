@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
       format.xml { render :xml => @user }
-      format.json { render :json => @user }
+      format.json { render :json => @user, :except => [:password_hash, :password_salt, :api_key] }
     end
   end
 
@@ -51,6 +51,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     #@user.password = params[:user][:password]
+    @user[:api_key] = User.generate_api_key
 
     if @user.save
       flash[:notice] = 'User was successfully created.'

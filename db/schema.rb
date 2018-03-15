@@ -10,24 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180310200936) do
+ActiveRecord::Schema.define(version: 20180315143025) do
 
-  create_table "calendars", force: :cascade do |t|
+  create_table "calendars", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.string "last_frost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "crops", force: :cascade do |t|
+  create_table "crops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.string "start_date"
     t.boolean "transplant"
     t.string "transplant_date"
-    t.integer "location_id"
+    t.bigint "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "days_to_maturity"
+    t.integer "days_to_maturity", default: 0
     t.integer "start_offset", default: 0
     t.integer "transplant_offset", default: 0
     t.text "notes"
@@ -35,9 +35,9 @@ ActiveRecord::Schema.define(version: 20180310200936) do
     t.index ["location_id"], name: "index_crops_on_location_id"
   end
 
-  create_table "locations", force: :cascade do |t|
+  create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
-    t.integer "calendar_id"
+    t.bigint "calendar_id"
     t.boolean "auto_water"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 20180310200936) do
     t.index ["calendar_id"], name: "index_locations_on_calendar_id"
   end
 
-  create_table "seasons", force: :cascade do |t|
-    t.integer "crop_id"
+  create_table "seasons", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.bigint "crop_id"
     t.string "year"
     t.string "start_date"
     t.string "transplant_date"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20180310200936) do
     t.index ["crop_id"], name: "index_seasons_on_crop_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "username"
     t.string "first_name"
     t.string "last_name"
@@ -69,6 +69,10 @@ ActiveRecord::Schema.define(version: 20180310200936) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "is_admin", default: 0
+    t.string "api_key"
   end
 
+  add_foreign_key "crops", "locations"
+  add_foreign_key "locations", "calendars"
+  add_foreign_key "seasons", "crops"
 end

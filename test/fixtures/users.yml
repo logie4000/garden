@@ -7,7 +7,7 @@ one:
   last_login: 2018-03-05 12:03:49
   password_hash: yadda
   password_salt: yadda
-
+  api_key: <%= User.generate_api_key() %>
 two:
   username: maukerman
   first_name: Milo
@@ -15,3 +15,4 @@ two:
   last_login: 2018-03-05 12:03:49
   password_hash: coffee
   password_salt: coffee
+  api_key: <%= User.generate_api_key() %>
