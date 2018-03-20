@@ -21,6 +21,7 @@
 </p>
 </div>
 <div id="item_image">
-  <%= image_tag @location.image.normal.url %>
+  <%= render :partial => "shared/item_image", :locals => {:obj => @location, :img => @location.image } %>
+  <%= render :partial => "shared/image_bucket", :locals => { :images => @images } %>
 </div>
 

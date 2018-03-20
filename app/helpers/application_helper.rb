@@ -25,4 +25,8 @@ module ApplicationHelper
     return link_to(link_text, calendar)
   end
 
+  def today?(datetime)
+    today_date = Date.today
+    return (datetime.strftime("%Y-%m-%d") == today_date.strftime("%Y-%m-%d"))
+  end
 end

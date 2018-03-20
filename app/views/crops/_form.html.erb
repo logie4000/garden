@@ -62,10 +62,6 @@
 </div>
 
 <div id="item_image">
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.file_field :image %><br>
-  </div>
   <%= render :partial => "shared/item_image", :locals => {:obj => crop} %>
 </div>
 <% end %>

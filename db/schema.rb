@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180315143025) do
+ActiveRecord::Schema.define(version: 20180320002333) do
 
   create_table "calendars", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
@@ -32,7 +32,18 @@ ActiveRecord::Schema.define(version: 20180315143025) do
     t.integer "transplant_offset", default: 0
     t.text "notes"
     t.string "image", default: ""
+    t.bigint "portrait_id"
     t.index ["location_id"], name: "index_crops_on_location_id"
+    t.index ["portrait_id"], name: "index_crops_on_portrait_id"
+  end
+
+  create_table "images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "file"
+    t.string "imageable_type"
+    t.bigint "imageable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
   end
 
   create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -72,6 +83,7 @@ ActiveRecord::Schema.define(version: 20180315143025) do
     t.string "api_key"
   end
 
+  add_foreign_key "crops", "images", column: "portrait_id"
   add_foreign_key "crops", "locations"
   add_foreign_key "locations", "calendars"
   add_foreign_key "seasons", "crops"

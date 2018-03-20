@@ -1,7 +1,7 @@
 class CropsController < ApplicationController
   before_action :authorize, only: [:edit, :update]
   before_action :authorize_as_admin, only: [:destroy]
-  before_action :set_crop, only: [:show, :edit, :update, :destroy, :add_new_season]
+  before_action :set_crop, only: [:show, :edit, :update, :destroy, :add_new_season, :refresh_images]
 
   # GET /crops
   # GET /crops.json
@@ -12,6 +12,7 @@ class CropsController < ApplicationController
   # GET /crops/1
   # GET /crops/1.json
   def show
+    @images = @crop.images
   end
 
   # GET /crops/new
@@ -39,6 +40,7 @@ class CropsController < ApplicationController
     end
 
     @crop = Crop.new(crop_params)
+    @images = @crop.images
 
     respond_to do |format|
       if @crop.save
@@ -56,7 +58,6 @@ class CropsController < ApplicationController
   def update
     if params[:crop][:start_offset_weeks]
       params[:crop][:start_offset] = params[:crop][:start_offset_weeks].to_i * 7
-      Rails.logger.debug "Updating start_offset with #{params.inspect}"
     end
 
     if params[:crop][:transplant_offset_weeks]
@@ -66,6 +67,8 @@ class CropsController < ApplicationController
     if params[:crop][:transplant] =~ /true/i
       params[:crop][:start_date] = TEXT_BEFORE_TRANSPLANT
     end
+
+    Rails.logger.debug "Updating crop with parameters: #{params.inspect}"
 
     respond_to do |format|
       if @crop.update(crop_params)

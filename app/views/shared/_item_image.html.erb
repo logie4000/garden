@@ -1,2 +1,9 @@
-  <%= image_tag(obj.image.normal.url) %>
 
+
+<%= image_tag(img.normal.url) %>
+
+<%= form_for [obj, Image.new], :html => {id: 'picture-dropzone', class: :dropzone, multipart: true} do |f| %>
+  <%= f.hidden_field :file %>
+  <%= f.hidden_field :object_id, :value => obj[:id] %>
+  <%= f.hidden_field :object_type, :value => obj.class %>
+<% end %>

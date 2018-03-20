@@ -1,9 +1,10 @@
 class Crop < ApplicationRecord
   belongs_to :location
   has_many :seasons
+  has_many :images, as: :imageable
+  has_one :image, as: :portrait
 
   mount_uploader :image, ImageUploader
-  validate :image_size_validation
 
   accepts_nested_attributes_for :seasons, :reject_if => proc {|attributes| attributes[:year].blank?}
 
@@ -66,8 +67,4 @@ class Crop < ApplicationRecord
     self.transplant_offset = weeks * 7
   end
 
-private
-  def image_size_validation
-    errors[:image] << "should be less than 500KB" if image.size > 0.5.megabytes
-  end
 end

@@ -1,0 +1,41 @@
+<script type="text/javascript">
+  var AUTH_TOKEN=$('meta[name="csrf-token"]').attr('content');
+  console.log("Running script...");
+
+Dropzone.autoDiscover = false;
+Dropzone.options.pictureDropzone = {
+  uploadMultiple: false,
+  paramName: "file",
+  maxFilesize: 1,
+  addRemoveLinks: true,
+  init: function() {
+    this.on('success', function(file, responseText) {
+      console.log("Success for " + file.name);
+    });
+
+    this.on('addedfile', function(file) {
+      console.log("Added a new file...");
+      var content = "IMAGE UPLOADED: " + file.name;
+      var imageBucket = document.getElementById("image_bucket");
+      if (imageBucket != null) {
+        var origHtml = imageBucket.innerHTML;
+        imageBucket.innerHTML = " ** NEW IMAGE ** ";
+      }
+    });
+
+    this.on('removedfile', function(file) {
+      if (file.xhr) {
+        return $.ajax({
+          url: "" + ($("#picture-dropzone").attr("action")) + "/" + (JSON.parse(file.xhr.response).id),
+          type: 'DELETE'
+        });
+      } else {
+        var imageBucket = document.getElementById("image_bucket");
+        if (imageBucket != null) {
+          imageBucket.innerHTML = "IMAGE DELETED WITHOUT XHR: " + file.name;
+        }
+      }
+    });
+  }
+};
+</script>

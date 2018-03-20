@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  resources :locations
+  resources :locations do
+    resources :images
+  end
+
   resources :calendars
   resources :seasons
+  resources :images
 
   resources :users, path_names: { new: 'register' } do
     collection do
@@ -14,6 +18,8 @@ Rails.application.routes.draw do
       get :logout
       get :oauth
     end
+
+    resources :images
   end
 
   resources :crops do
@@ -24,7 +30,10 @@ Rails.application.routes.draw do
 
     member do
       patch :add_location
+      get :refresh_images
     end
+
+    resources :images
   end
 
   namespace :api, defaults: {format: 'json'} do

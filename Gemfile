@@ -8,9 +8,12 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
+
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 gem "mysql2"
+
+gem 'jquery-rails'
 
 # Rest client used for REST api support, e.g. Github auth
 gem 'rest-client'
@@ -18,6 +21,7 @@ gem 'rest-client'
 # Uploader support
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.3'
+#gem 'dropzonejs-rails'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
