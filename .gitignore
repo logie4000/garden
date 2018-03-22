@@ -20,6 +20,9 @@
 # Ignore all public upload files
 /public/uploads/*
 
+# Ignore precompiled assets
+/public/assets/*
+
 /node_modules
 /yarn-error.log
 

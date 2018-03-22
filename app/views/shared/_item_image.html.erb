@@ -1,6 +1,9 @@
 
-
-<%= image_tag(img.normal.url) %>
+<div id="portrait">
+  <% unless (img.nil?) %>
+    <%= image_tag(img.normal.url) %>
+  <% end %>
+</div>
 
 <%= form_for [obj, Image.new], :html => {id: 'picture-dropzone', class: :dropzone, multipart: true} do |f| %>
   <%= f.hidden_field :file %>
