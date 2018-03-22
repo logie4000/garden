@@ -12,42 +12,52 @@
 //
 //= require rails-ujs
 //= require jquery
-// require dropzone
+//= require dropzone
 // require_tree .
 //
 
 Dropzone.autoDiscover = false;
 
-var myDropzone = new Dropzone("#picture-dropzone",{
-  uploadMultiple: false,
-  paramName: "file",
-  maxFilesize: 1,
-  addRemoveLinks: true,
-  init: function() {
-    this.on('success', function(file, response) {
-      console.log("Response: " + JSON.stringify(response));
-      console.log("Success for " + file.name + ": " + response.file['thumb']['url']);
+function addDropzone(dropElementId, targetElementId, withThumbnail) {
+  if (document.getElementById(elementId)) {
+    var myDropzone = new Dropzone("#" + dropElementId, {
+      uploadMultiple: false,
+      paramName: "file",
+      maxFilesize: 1,
+      addRemoveLinks: true,
+      init: function() {
+        this.on('success', function(file, response) {
+          console.log("Response: " + JSON.stringify(response));
+          console.log("Success for " + file.name + ": " + response.file['thumb']['url']);
 
-      var imageBucket = document.getElementById("image_bucket");
-      if (imageBucket != null && response != null) {
-        var origHtml = imageBucket.innerHTML;
-        imageBucket.innerHTML = origHtml + "&nbsp;<img src='/garden_planner/" + response.file['thumb']['url'] + "'>";
-      }
-    });
+          var imageBucket = document.getElementById(targetElementId);
+          if (imageBucket != null && response != null) {
+            var origHtml = imageBucket.innerHTML;
+            var newImgUrl = response.file['normal']['url'];
+            if (withThumbnail) {
+              newImgUrl = response.file['thumb']['url'];
+            }
 
-    this.on('removedfile', function(file) {
-      if (file.xhr) {
-        return $.ajax({
-          url: "" + ($("#picture-dropzone").attr("action")) + "/" + (JSON.parse(file.xhr.response).id),
-          type: 'DELETE'
+            imageBucket.innerHTML = origHtml + "&nbsp;<img src='/garden_planner/" + newImgUrl + "'>";
+          }
         });
-      } else {
-        var imageBucket = document.getElementById("image_bucket");
-        if (imageBucket != null) {
-          imageBucket.innerHTML = "IMAGE DELETED WITHOUT XHR: " + file.name;
-        }
+
+        this.on('removedfile', function(file) {
+          if (file.xhr) {
+            return $.ajax({
+              url: "" + ($("#" + dropElementId).attr("action")) + "/" + (JSON.parse(file.xhr.response).id),
+              type: 'DELETE'
+            });
+          } else {
+            var imageBucket = document.getElementById(targetElementId);
+            if (imageBucket != null) {
+              imageBucket.innerHTML = "IMAGE DELETED WITHOUT XHR: " + file.name;
+            }
+          }
+        });
       }
     });
   }
-});
+}
+
 
