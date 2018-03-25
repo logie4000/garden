@@ -1,5 +1,6 @@
 class CalendarsController < ApplicationController
-  before_action :authorize, only: [:edit, :update, :destroy]
+  before_action :authorize, only: [:new, :create, :edit, :update]
+  before_action :authorize_as_admin, only: [:destroy]
   before_action :set_calendar, only: [:show, :edit, :update, :destroy]
 
   # GET /calendars

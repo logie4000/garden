@@ -3,6 +3,8 @@
  <%= link_to 'Show', crop %> |
 <% elsif mode == 'show' %>
  <%= link_to 'Edit', edit_crop_path(crop) %> |
+<% elsif mode == 'index' %>
+ <%= link_to 'New Crop', new_crop_path %> |
 <% end %>
 
  <%= link_to 'Crops List', crops_path %>

@@ -23,6 +23,10 @@
 # Ignore precompiled assets
 /public/assets/*
 
+# Ignore site-specific configuration
+/config/initializers/site_config.rb
+/config/database.yml
+
 /node_modules
 /yarn-error.log
 

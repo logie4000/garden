@@ -150,7 +150,7 @@ class UsersController < ApplicationController
                 :payload => {:client_id => client_id,
                     :client_secret => client_secret,
                     :code => session_code,
-                    :redirect_uri => 'https://www.teapothill.org/garden_planner/users/oauth',
+                    :redirect_uri => "#{OAUTH_REDIRECT_URI}",
                     :state => OAUTH_STATE}.to_json,
                 :headers => {:content_type => :json, :accept => :json})
     result = request.execute

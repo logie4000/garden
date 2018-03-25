@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Graphical Crops</h1>
-<b><%= link_to("List", crops_path) %></b>
+<b><%= link_to("List", crops_path) %> | <%= link_to 'New Crop', new_crop_path %></b>
 
 <% scale = 5 %>
 <% growing_season_start = DateTime.new(2018, 3, 1) %>
