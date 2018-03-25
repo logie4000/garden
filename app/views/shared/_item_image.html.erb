@@ -1,12 +1,8 @@
 
+<%= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';$(function() {addPortraitDropzoneById('#{images_path}', 'portrait', {'authenticity_token': AUTH_TOKEN, 'image[object_id]': '#{obj[:id]}', 'image[object_type]': '#{obj.class}'}, '#{set_portrait_crop_path}', false);})" %>
+
 <div id="portrait">
   <% unless (img.nil?) %>
-    <%= image_tag(img.normal.url) %>
+    <%= image_tag(img.file.normal.url) %>
   <% end %>
 </div>
-
-<%= form_for [obj, Image.new], :html => {id: 'picture-dropzone', class: :dropzone, multipart: true} do |f| %>
-  <%= f.hidden_field :file %>
-  <%= f.hidden_field :object_id, :value => obj[:id] %>
-  <%= f.hidden_field :object_type, :value => obj.class %>
-<% end %>

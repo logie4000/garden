@@ -1,7 +1,7 @@
 class CropsController < ApplicationController
   before_action :authorize, only: [:edit, :update]
   before_action :authorize_as_admin, only: [:destroy]
-  before_action :set_crop, only: [:show, :edit, :update, :destroy, :add_new_season, :refresh_images]
+  before_action :set_crop, only: [:show, :edit, :update, :destroy, :add_new_season, :set_portrait]
 
   # GET /crops
   # GET /crops.json
@@ -99,6 +99,19 @@ class CropsController < ApplicationController
 
   def graphical
     @crops = Crop.all.sort_by {|crop|  [crop.get_start_datetime, crop.name]}
+  end
+
+  def set_portrait
+    if (params[:image_id])
+      Rails.logger.debug("Adding portrait with image_id = #{params[:image_id]}")
+      @portrait = Image.find(params[:image_id])
+      @crop.portrait = @portrait
+    end
+
+    respond_to do |format|
+      @crop.save!
+      format.json { render :json => @crop.portrait }
+    end
   end
 
   private

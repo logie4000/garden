@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     member do
       patch :add_location
       get :refresh_images
+      post :set_portrait
     end
 
     resources :images
@@ -42,6 +43,7 @@ Rails.application.routes.draw do
       resources :calendars
       resources :locations
       resources :users
+      resources :images
     end
   end
 

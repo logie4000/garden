@@ -20,7 +20,7 @@
       <% season = nil %>
       <% season = crop.seasons.this_year.first %>
       <tr>
-        <td><%= image_tag(crop.image.thumb.url) %>
+        <td><%= image_tag(crop.portrait.file.thumb.url) unless (crop.portrait.nil?) %>
         <td><%= link_to(crop.name, crop) %></td>
         <td><%= calculate_start_date(crop) %><br>
           <%= link_to("Actual: #{season.start_date}", season) if (season && season.start_date) %>
