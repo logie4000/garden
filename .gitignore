@@ -25,6 +25,7 @@
 
 # Ignore site-specific configuration
 /config/initializers/site_config.rb
+/config/initializers/session_store.rb
 /config/database.yml
 package.json
 

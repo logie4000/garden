@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180320002333) do
+ActiveRecord::Schema.define(version: 20180326131526) do
 
   create_table "calendars", force: :cascade do |t|
     t.string "name"
@@ -53,7 +53,9 @@ ActiveRecord::Schema.define(version: 20180320002333) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image", default: ""
+    t.integer "portrait_id"
     t.index ["calendar_id"], name: "index_locations_on_calendar_id"
+    t.index ["portrait_id"], name: "index_locations_on_portrait_id"
   end
 
   create_table "seasons", force: :cascade do |t|
