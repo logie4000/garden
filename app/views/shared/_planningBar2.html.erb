@@ -7,8 +7,8 @@
 <% today_color = "#cc0000" %>
 <% today_date = Date.today %>
 
-<div class='planningBar' style='<%= "height: #{bar_height}px;width: #{total_width}" -%>' >
-<div style='text-align:right;padding-right:7px;font-size:10px;float:left;<%= "width:#{125 + (padding * day_width)}px" %>'><%= h(title) -%></div>
+<div class='planningBar' style='<%= "height: #{bar_height}px;width: #{total_width}; white-space: nowrap;" -%>' >
+<div style='text-align:right;padding-right:7px;font-size:10px;float:left;<%= "width:#{125 + (padding * day_width)}px" %>;white-space: nowrap;'><%= h(title) -%></div>
   <% left_width.times do |d| %>
     <% break if (d + padding) > total_width %>
     <% day_date = start_date + d %>

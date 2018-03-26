@@ -16,7 +16,7 @@
   <tbody>
     <% @locations.each do |location| %>
       <tr>
-        <td><%= link_to(image_tag(location.image.thumb.url), location) %>
+        <td><%= image_tag(location.portrait.file.thumb.url) unless (location.portrait.nil?) %>
         <td><%= link_to(location.name, location) %></td>
         <td><%= calendar_link(location.calendar) %></td>
         <td><%= location.auto_water %></td>

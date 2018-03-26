@@ -26,6 +26,7 @@
 # Ignore site-specific configuration
 /config/initializers/site_config.rb
 /config/database.yml
+package.json
 
 /node_modules
 /yarn-error.log

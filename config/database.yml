@@ -14,7 +14,7 @@ default: &default
 
 development:
   <<: *default
-  database: wills_garden_development
+  database: garden_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -26,5 +26,5 @@ test:
 
 production:
   <<: *default
-  database: wills_garden_production
+  database: garden_production
 
