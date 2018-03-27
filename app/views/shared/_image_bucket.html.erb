@@ -1,6 +1,6 @@
 <div id="image_bucket">
 <% images.each do |img| %>
-  <%= image_tag(img.file.thumb.url) -%>&nbsp;
+ <a href="#" onClick="swap_img('portrait', '/garden_planner<%= j(img.file.normal.url) -%>')"><%= image_tag(img.file.thumb.url) -%></a>&nbsp;
 <% end %>
 </div>
 

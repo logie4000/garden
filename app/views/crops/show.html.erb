@@ -37,7 +37,7 @@
 
 <p>
   <strong>Planting Notes:</strong>
-  <%= @crop.notes %>
+  <pre><%= h(@crop.notes) %></pre>
 </p>
 
 <% unless @crop.seasons.empty? %>

@@ -17,6 +17,7 @@
 //
 
 Dropzone.autoDiscover = false;
+Dropzone.maxFilesize = 5;
 
 function addDropzoneById(dropUrl, dropElementId, targetElementId, withThumbnail, dropParams) {
   if (document.getElementById(dropElementId)) {
@@ -26,7 +27,7 @@ function addDropzoneById(dropUrl, dropElementId, targetElementId, withThumbnail,
       url: dropUrl,
       uploadMultiple: false,
       paramName: 'file',
-      maxFilesize: 1,
+      maxFilesize: 5,
       addRemoveLinks: true,
       params: dropParams,
       init: function() {
@@ -120,3 +121,11 @@ function addPortraitDropzoneById(dropUrl, dropElementId, dropParams, setPortrait
     console.log("Element '" + dropElementId + "' does not exist!");
   }
 }
+
+function swap_img(id, url) {
+  console.log("Swapping image at id '" + id + "' with url '" + url + "'...");
+  if (document.images) {
+    document.images[id].src = url;
+  }
+}
+
