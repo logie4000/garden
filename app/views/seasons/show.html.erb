@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Crop Name:</strong>
+  <%= link_to(@season.crop.name, @season.crop) -%> <%= h("(#{@season.year})") %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @season.start_date %>
+</p>
+
+<p>
+  <strong>Transplant date:</strong>
+  <%= @season.transplant_date %>
+</p>
+
+<p>
+  <strong>Harvest date</strong>
+  <%= @season.harvest_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_season_path(@season) %> |
+<%= link_to 'Back', seasons_path %>

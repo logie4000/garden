@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Welcome to <%= APPLICATION_TITLE -%><% if (user = session[:user_id] && User.find_by_id(session[:user_id])) %>
+    <%= ", #{user.first_name} #{user.last_name}" %>
+    </h1>
+<% else %>
+    </h1>
+Please log in or <%= link_to "register", register_users_path %> as a new user:
+    <%= form_tag( authenticate_users_path ) do %>
+      <%= render :partial => 'login_form' %>
+      <%= submit_tag "Login" %>
+    <% end -%>
+<% end %>
+
+<%= render :partial => "github_login", :locals => { :client_id => CLIENT_ID } %>

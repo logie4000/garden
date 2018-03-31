@@ -1,0 +1,61 @@
+<% unless notice.blank? %>
+  <p id="notice"><%= notice %></p>
+<% end %>
+
+<%= render :partial => "toolbar", :locals => {:crop => @crop, :mode => 'show'} %>
+
+<div id="item_details">
+<p>
+  <strong>Name:</strong>
+  <%= @crop.name %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= calculate_start_date(@crop) %>
+</p>
+
+<p>
+  <strong>Transplant:</strong>
+  <%= @crop.transplant ? "Yes" : "No" %>
+</p>
+
+<p>
+  <strong>Transplant date:</strong>
+  <%= calculate_transplant_date(@crop) %>
+</p>
+
+<p>
+  <strong>Expected Harvest Date:</strong>
+  <%= calculate_harvest_date(@crop) %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= location_link(@crop.location) %>
+</p>
+
+<p>
+  <strong>Planting Notes:</strong>
+  <pre><%= h(@crop.notes) %></pre>
+</p>
+
+<% unless @crop.seasons.empty? %>
+    <strong>Growing Seasons</strong>
+    <% @crop.seasons.each do |season| %>
+      <% @season = season if (season.year == Date.today.year.to_s) %>
+      <%= render :partial => "season_details", :locals => {:season => season} %>
+    <% end %>
+<% end %>
+<% if (@season) %>
+  <%= link_to 'Edit current growing season', :controller => 'seasons', :action => 'edit', :id => @season.id %>
+<% else %>
+  <%= link_to 'Create New growing season', :controller => 'seasons', :action => 'new', :crop_id => @crop.id %>
+<% end %>
+</div>
+
+<div id="item_image">
+  <%= render :partial => "shared/item_image", :locals => {:obj => @crop, :img => @crop.portrait } %>
+  <%= render :partial => "shared/image_bucket", :locals => { :images => @images, :refresh_url => refresh_images_crop_path(@crop) } %>
+</div>
+

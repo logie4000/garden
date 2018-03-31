@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  name: Calendar One 
+  last_frost: <%= DateTime.parse(DEFAULT_LAST_FROST) %>
+
+two:
+  id: 2
+  name: Calendar Two
+  last_frost: <%= DateTime.parse(DEFAULT_LAST_FROST) %>

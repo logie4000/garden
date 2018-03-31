@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  crop: one
+  start_date: MyString
+  transplant_date: MyString
+  transplant: false
+  harvest_date: MyString
+  notes: MyText
+
+two:
+  crop: two
+  start_date: MyString
+  transplant_date: MyString
+  transplant: false
+  harvest_date: MyString
+  notes: MyText

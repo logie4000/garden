@@ -1,0 +1,32 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+tomato:
+  name: Tomato 
+  start_date: <%= TEXT_BEFORE_TRANSPLANT %>
+  transplant: true
+  transplant_date: <%= TEXT_AFTER_LAST_FROST %>
+  location_id: 1
+  start_offset: 21
+  transplant_offset: 7
+  days_to_maturity: 55
+
+basil:
+  name: Basil
+  start_date: <%= TEXT_BEFORE_TRANSPLANT %>
+  transplant: true
+  transplant_date: <%= TEXT_BEFORE_LAST_FROST %>
+  location_id: 1
+  start_offset: 7
+  transplant_offset: 0
+  days_to_maturity: 55
+
+radish:
+  name: Radish
+  start_date: <%= TEXT_BEFORE_LAST_FROST %>
+  transplant: false
+  transplant_date: <%= TEXT_BEFORE_LAST_FROST %>
+  location_id: 1
+  start_offset: 21
+  transplant_offset: 0
+  days_to_maturity: 55
+

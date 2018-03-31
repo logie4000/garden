@@ -1,0 +1,67 @@
+<%= form_with(model: crop, local: true) do |form| %>
+  <% if crop.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(crop.errors.count, "error") %> prohibited this crop from being saved:</h2>
+
+      <ul>
+      <% crop.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div id="item_details">
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :crop_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :days_to_maturity %>
+    <%= form.text_field :days_to_maturity, id: :crop_days_to_maturity %>
+  </div>
+
+  <b>Starting seeds date</b>
+  <div class="field">
+    <%= form.label :start_offset %>
+    <%= collection_select(:crop, :start_offset_weeks, 0..16, :to_s, :to_s) -%> weeks
+  </div>
+
+  <div class="field">
+    <%= form.label :start_date %>
+    <%= collection_select(:crop, :start_date, [TEXT_BEFORE_LAST_FROST, TEXT_BEFORE_TRANSPLANT, TEXT_AFTER_LAST_FROST], :to_s, :to_s) %>
+  </div>
+
+  <div class="field">
+    <%= form.check_box :transplant, id: :crop_transplant -%> Transplant
+  </div>
+
+  <b>Transplanting date</b>
+  <div class="field">
+    <%= form.label :transplant_offset %>
+    <%= collection_select(:crop, :transplant_offset_weeks, 0..12, :to_s, :to_s) -%> weeks
+  </div>
+
+  <div class="field">
+    <%= form.label :transplant_date %>
+    <%= collection_select(:crop, :transplant_date, [TEXT_BEFORE_LAST_FROST, TEXT_AFTER_LAST_FROST], :to_s, :to_s) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location_id %>
+    <%= collection_select(:crop, :location_id, Location.all, :id, :name) %>
+  </div>
+
+  <div>
+    <%= form.label :notes %>
+    <%= form.text_area :notes, id: :notes %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+</div>
+
+<div id="item_image">
+  <%= render :partial => "shared/item_image", :locals => {:obj => crop, :img => crop.portrait} %>
+</div>
+<% end %>

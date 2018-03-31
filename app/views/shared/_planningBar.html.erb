@@ -1,0 +1,26 @@
+
+<% bar_height = 15 %>
+
+<% if hover_text.nil? %>
+  <% percent_complete = (status > 100 ? 100 : status) %>
+  <% hover_text = "#{title} #{percent_complete}% complete" unless (title.nil?)%>
+  <% hover_text = "#{percent_complete}% complete" if (hover_text.nil?) %>
+<% end %>
+
+<% if left_width > total_width %>
+  <% left_width = total_width %>
+<% end %>
+
+<% if right_width > (total_width - left_width) %>
+  <% right_width = (total_width - left_width) %>
+<% end %>
+
+<% padding = 0 unless padding %>
+<div class='planningBar' title='<%= h(hover_text)%>' style='<%= "height: #{bar_height}px;width: #{total_width}" -%>' >
+  <div style='text-align:right;padding-right:7px;font-size:10px;float:left;<%= "width:#{125 + padding}px" %>'><%= h(title) -%></div>
+  <div class='barIndexLeft' style='<%= "background-color: #70a5ff;width: #{left_width}px" -%>'><span style='text-align:left;padding-left:2px;font-size:10px;position:relative;top:-5px;left:0px;;'><%= h("Start date: #{start_date_text}") if (start_date_text)%></span></div>
+  <div class='barIndexRight' style='<%= "background-color: #70ffa0;width: #{right_width}px" -%>'></div>
+  <div style='clear: both'></div>
+</div>
+
+

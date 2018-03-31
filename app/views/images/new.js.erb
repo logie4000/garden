@@ -1,0 +1,3 @@
+var image_bucket = document.getElementyId("image_bucket");
+image_bucket.innerHTML="<%= j( render :partial => 'shared/image_bucket', :locals => { :images => @images }) %>";
+

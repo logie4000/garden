@@ -1,0 +1,7 @@
+<p><b>Login name:</b> <%= @user.username -%></p>
+<p><b>First name:</b> <%= @user.first_name -%></p>
+<p><b>Last name:</b> <%= @user.last_name -%></p>
+
+<div id="links">
+<%= link_to "Edit", edit_user_path(@user) %> | <%= link_to "User list", users_path %>
+</div>

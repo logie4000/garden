@@ -1,0 +1,6 @@
+<%= render :partial => 'shared/location_toolbar', :locals => {:location => @location, :mode =>'edit'} %>
+
+<%= render 'form', location: @location %>
+
+<%= link_to 'Show', @location %> |
+<%= link_to 'Back', locations_path %>

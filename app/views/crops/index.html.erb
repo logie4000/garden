@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Crops</h1>
+<b><%= link_to("Graphical", graphical_crops_path) %> | <%= link_to 'New Crop', new_crop_path %></b>
+<table>
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th>Name</th>
+      <th>Start date</th>
+      <th>Transplant date</th>
+      <th>Expected Harvest</th>
+      <th>Location</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @crops.each do |crop| %>
+      <% season = nil %>
+      <% season = crop.seasons.this_year.first %>
+      <tr>
+        <td><%= image_tag(crop.portrait.file.thumb.url) unless (crop.portrait.nil?) %>
+        <td><%= link_to(crop.name, crop) %></td>
+        <td><%= calculate_start_date(crop) %><br>
+          <%= link_to("Actual: #{season.start_date}", season) if (season && season.start_date) %>
+        </td>
+        <td><%= calculate_transplant_date(crop) if (crop.transplant) %><br>
+          <%= link_to("Actual: #{season.transplant_date}", season) if (season && !season.transplant_date.blank?) %>
+        </td>
+        <td><%= calculate_harvest_date(crop) %><br>
+          <%= link_to("Actual: #{season.harvest_date}", season) if (season && !season.harvest_date.blank?) %>
+        </td>
+        <td><%= location_link(crop.location) %></td>
+        <td><%= link_to 'Edit', edit_crop_path(crop) %></td>
+        <% if (@current_user && @current_user.is_admin?) %>
+          <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

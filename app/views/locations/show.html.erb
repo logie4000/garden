@@ -1,0 +1,27 @@
+<% unless notice.blank? %>
+  <p id="notice"><%= notice %></p>
+<% end %>
+
+<%= render :partial => 'shared/location_toolbar', :locals => {:location => @location, :mode => 'show'} %>
+
+<div id="item_details">
+<p>
+  <strong>Name:</strong>
+  <%= @location.name %>
+</p>
+
+<p>
+  <strong>Calendar:</strong>
+  <%= calendar_link(@location.calendar) %>
+</p>
+
+<p>
+  <strong>Auto water:</strong>
+  <%= @location.auto_water %>
+</p>
+</div>
+<div id="item_image">
+  <%= render :partial => "shared/item_image", :locals => {:obj => @location, :img => @location.portrait} %>
+  <%= render :partial => "shared/image_bucket", :locals => { :images => @images } %>
+</div>
+

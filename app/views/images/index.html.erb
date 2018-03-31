@@ -1,0 +1,23 @@
+<table>
+<tr>
+<th>&nbsp;</th>
+<th>id</th>
+<th>file</th>
+<th>imageable_id</th>
+<th>imageable_type</th>
+<th>&nbsp;</td>
+</tr>
+
+<% @images.each do |image| %>
+  <tr>
+  <td><%= image_tag(image.file.thumb.url) %></td>
+  <td><%= image.id %></td>
+  <td><%= image.file %></td>
+  <td><%= image.imageable_id %></td>
+  <td><%= image.imageable_type %></td>
+  <td><%= link_to 'Delete', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+
+</table>
+

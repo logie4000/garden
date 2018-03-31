@@ -1,0 +1,31 @@
+<% if year %>
+  <strong><%= h(year) %></strong>
+<% end %>
+
+<table>
+  <tbody>
+    <th>&nbsp;</th>
+    <th>Crop</th>
+    <th>Start Date</th>
+    <th>Transplant Date</th>
+    <th>Harvest Date</th>
+
+    <% Season.where("year = #{year}").order(:start_date).each do |season| %>
+      <tr>
+        <td><%= link_to(image_tag(season.crop.image.thumb.url), season.crop) %></td>
+        <td><%= link_to(season.crop.name, season.crop) %></td>
+        <td><%= season.start_date %></td>
+        <td><%= season.transplant_date %></td>
+        <td><%= season.harvest_date %></td>
+
+        <td><%= link_to 'Edit', edit_season_path(season) %></td>
+        <% if (@current_user && @current_user.is_admin?) %>
+          <td><%= link_to 'Destroy', season, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
