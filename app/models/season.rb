@@ -1,6 +1,6 @@
 class Season < ApplicationRecord
   belongs_to :crop
-  has_one :square
+  has_many :squares
 
   validates :year, :presence => :true
   validates :crop_id, :presence => :true

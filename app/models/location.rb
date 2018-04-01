@@ -2,6 +2,7 @@ class Location < ApplicationRecord
   belongs_to :calendar
   has_many :images, as: :imageable
   has_one :portrait, :class_name => "Image", as: :imageable
+  has_many :boxes
 
   mount_uploader :image, ImageUploader
 
