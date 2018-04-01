@@ -35,11 +35,14 @@ class BoxesController < ApplicationController
         m = type.match(/(\d)x(\d)/)
         rows = m[1]
         cols = m[2]
-        rows.to_i.times do
-          cols.to_i.times do
-            @box.squares << Square.new(:row => , :column => )
+        (0..rows.to_i).each do |r|
+          (0..cols.to_i) do |c|
+            @box.squares << Square.new(:row => r, :column => c)
           end
         end
+      end
+    end
+    
     respond_to do |format|
       if @box.save
         format.html { redirect_to @box, notice: 'Box was successfully created.' }
