@@ -7,8 +7,12 @@
 <% growing_season_start = DateTime.new(2018, 3, 1) %>
 <% growing_season_end = DateTime.new(2018, 8, 31) %>
 
+<<<<<<< HEAD
 <div style="width: 2000px; height: 100%; overflow: auto;">
  <table class="growth_chart" style="width:100%;">
+=======
+ <table>
+>>>>>>> origin/master
     <% @crops.each do |crop| %>
       <% next if crop.get_start_datetime() > growing_season_end %>
       <tr><td>
@@ -17,4 +21,9 @@
     <% end %>
   </table>
 <br>
+<<<<<<< HEAD
 </div>
+=======
+
+<%= link_to 'New Crop', new_crop_path %>
+>>>>>>> origin/master

@@ -1,7 +1,10 @@
 class Season < ApplicationRecord
   belongs_to :crop
+<<<<<<< HEAD
   has_many :squares
 
+=======
+>>>>>>> origin/master
   validates :year, :presence => :true
   validates :crop_id, :presence => :true
   validates_format_of :year, :with => /[0-9]{,4}/

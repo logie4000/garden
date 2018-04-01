@@ -3,7 +3,10 @@ class Crop < ApplicationRecord
   has_many :seasons
   has_many :images, as: :imageable
   has_one :portrait, :class_name => "Image", as: :imageable
+<<<<<<< HEAD
   has_many :squares
+=======
+>>>>>>> origin/master
 
   mount_uploader :image, ImageUploader
 
