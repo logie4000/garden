@@ -18,10 +18,10 @@
 !/tmp/.keep
 
 # Ignore all public upload files
-/public/uploads/*
+/public/uploads
 
 # Ignore precompiled assets
-/public/assets/*
+/public/assets
 
 # Ignore site-specific configuration
 /config/initializers/site_config.rb
