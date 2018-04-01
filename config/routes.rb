@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :calendars
   resources :seasons
   resources :images
+  resource :boxes
 
   resources :users, path_names: { new: 'register' } do
     collection do
@@ -44,6 +45,7 @@ Rails.application.routes.draw do
       resources :locations
       resources :users
       resources :images
+      resources :boxes
     end
   end
 

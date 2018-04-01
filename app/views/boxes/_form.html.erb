@@ -17,6 +17,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :location_id %>
+    <%= collection_select(:box, :location_id, Location.all, :id, :name) %>
+  </div>
+
+  <div class="field">
     Type:
     <%= collection_select(:box, :box_type, ["3x3", "3x5", "4x4"], :to_s, :to_s) %> 
   </div>

@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @box.name %>
+</p>
+
+<p>
+  <strong>Label:</strong>
+  <%= @box.label %>
+</p>
+<p>
+  <strong>Type:</strong>
+  <%= @box.type%>
+</p>
+<p>
+  <strong>Squares:</strong>
+  <% @box.squares.each do |square| %>
+    <%= link_to "#{square.row},#{square.column}", square %>
+  <% end %>
+</p>
+<p>
+  <strong>Label:</strong>
+  <%= @box.label %>
+</p>
+
+<%= link_to 'Edit', edit_box_path(@box) %> |
+<%= link_to 'Back', boxes_path %>

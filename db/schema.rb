@@ -10,12 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180401121655) do
+ActiveRecord::Schema.define(version: 20180401180917) do
 
   create_table "boxes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "label"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "location_id"
+    t.string "type"
+    t.index ["location_id"], name: "index_boxes_on_location_id"
   end
 
   create_table "calendars", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -30,7 +33,7 @@ ActiveRecord::Schema.define(version: 20180401121655) do
     t.string "start_date"
     t.boolean "transplant"
     t.string "transplant_date"
-    t.integer "location_id"
+    t.bigint "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "days_to_maturity", default: 0
@@ -38,37 +41,34 @@ ActiveRecord::Schema.define(version: 20180401121655) do
     t.integer "transplant_offset", default: 0
     t.text "notes"
     t.string "image", default: ""
-    t.integer "portrait_id"
+    t.bigint "portrait_id"
     t.index ["location_id"], name: "index_crops_on_location_id"
     t.index ["portrait_id"], name: "index_crops_on_portrait_id"
   end
 
-  create_table "images", force: :cascade, do |t|
+  create_table "images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "file"
     t.string "imageable_type"
-    t.integer "imageable_id"
+    t.bigint "imageable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
   end
 
-  create_table "locations", force: :cascade do |t|
+  create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
-    t.integer "calendar_id"
+    t.bigint "calendar_id"
     t.boolean "auto_water"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image", default: ""
     t.bigint "portrait_id"
-    t.bigint "box_id"
-    t.index ["box_id"], name: "index_locations_on_box_id"
-    t.integer "portrait_id"
     t.index ["calendar_id"], name: "index_locations_on_calendar_id"
     t.index ["portrait_id"], name: "index_locations_on_portrait_id"
   end
 
-  create_table "seasons", force: :cascade do |t|
-    t.integer "crop_id"
+  create_table "seasons", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.bigint "crop_id"
     t.string "year"
     t.string "start_date"
     t.string "transplant_date"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20180401121655) do
     t.index ["crop_id"], name: "index_squares_on_crop_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "username"
     t.string "first_name"
     t.string "last_name"
@@ -108,9 +108,9 @@ ActiveRecord::Schema.define(version: 20180401121655) do
     t.string "api_key"
   end
 
+  add_foreign_key "boxes", "locations"
   add_foreign_key "crops", "images", column: "portrait_id"
   add_foreign_key "crops", "locations"
-  add_foreign_key "locations", "boxes"
   add_foreign_key "locations", "calendars"
   add_foreign_key "locations", "images", column: "portrait_id"
   add_foreign_key "seasons", "crops"
