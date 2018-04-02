@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Graphical Crops - Actual Season</h1>
+<b><%= link_to("List", crops_path) %> | <%= link_to 'New Crop', new_crop_path %></b>
+
+<% scale = 5 %>
+<% growing_season_start = DateTime.new(2018, 3, 1) %>
+<% growing_season_end = DateTime.new(2018, 8, 31) %>
+
+<div style="width: 2000px; height: 100%; overflow: auto;">
+ <table class="growth_chart" style="width:100%;">
+    <% @crops.each do |crop| %>
+      <% next if crop.get_actual_start_datetime() > growing_season_end %>
+      <tr><td>
+        <%= render :partial => "growth_chart", :locals => {:crop => crop, :growing_season_start => growing_season_start, :growing_season_end => growing_season_end, :do_actual => true} %>
+      </td></tr>
+    <% end %>
+  </table>
+<br>
+</div>
+
+<%= link_to 'New Crop', new_crop_path %>

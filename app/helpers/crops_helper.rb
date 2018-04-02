@@ -28,6 +28,8 @@ module CropsHelper
 
     total_days = (dt_harvest - dt_start).to_i
     
-    return total_days - crop.days_to_maturity
+    offset = total_days - crop.days_to_maturity
+    return offset
   end
+
 end

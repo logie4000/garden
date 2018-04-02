@@ -23,6 +23,13 @@ class Crop < ApplicationRecord
     return d_day + offset
   end
 
+  def get_actual_start_datetime
+    season = self.seasons.last
+    if (season)
+      return Date.parse(season.start_date) if (season.start_date)
+    end
+  end
+
   def get_transplant_datetime
     d_day = self.location.get_last_frost()
     offset = 0
@@ -36,6 +43,13 @@ class Crop < ApplicationRecord
     end
 
     return d_day + offset
+  end
+
+  def get_actual_transplant_datetime
+    season = self.seasons.last
+    if (season)
+      return Date.parse(season.transplant_date) if (season.transplant_date)
+    end
   end
 
   def get_harvest_datetime

@@ -1,0 +1,12 @@
+<% right_width = planted_days(season) %>
+<% left_width = planting_offset(season) %>
+
+<% dt_start = Date.parse(season.start_date) %>
+<% padding = (dt_start - growing_season_start).to_i %>
+<% total_width = right_width + left_width + padding %>
+<% max_width = (growing_season_end - dt_start) + padding %>
+<% total_width = max_width if (total_width > max_width) %>
+<% title ||= season.crop.name %>
+
+<%= render :partial => "shared/planningBar2", :locals => {:start_date => dt_start, :total_width => total_width, :padding =>  padding, :left_width => left_width, :right_width => right_width, :title => title } %>
+

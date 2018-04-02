@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   end
 
   resources :calendars
-  resources :seasons
+  resources :seasons do
+    collection do
+      get :graphical
+    end
+  end
+
   resources :images
   resources :boxes
   resources :squares

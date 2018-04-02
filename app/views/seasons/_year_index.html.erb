@@ -12,10 +12,10 @@
 
     <% Season.where("year = #{year}").order(:start_date).each do |season| %>
       <tr>
-        <td><%= link_to(image_tag(season.crop.image.thumb.url), season.crop) %></td>
+        <td><%= link_to(image_tag(season.crop.portrait.file.thumb.url), season.crop) %></td>
         <td><%= link_to(season.crop.name, season.crop) %></td>
         <td><%= season.start_date %></td>
-        <td><%= season.transplant_date %></td>
+        <td><%= season.crop.transplant ? season.transplant_date : "Direct seeded" %></td>
         <td><%= season.harvest_date %></td>
 
         <td><%= link_to 'Edit', edit_season_path(season) %></td>
