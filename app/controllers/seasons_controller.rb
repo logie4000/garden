@@ -66,6 +66,14 @@ class SeasonsController < ApplicationController
       params[:year] = Date.today.year.to_s
     end
 
+    if (params[:season][:square_id])
+      params[:season][:square_id].each do |square_id|
+        next if (square_id.blank?)
+        square = Square.find(square_id)
+        @season.squares << square
+      end
+    end
+
     respond_to do |format|
       if @season.update(season_params)
         format.html { redirect_to @season.crop, notice: 'Season was successfully updated.' }

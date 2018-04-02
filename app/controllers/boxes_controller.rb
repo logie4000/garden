@@ -29,18 +29,22 @@ class BoxesController < ApplicationController
     @box = Box.new(box_params)
 
     # Create squares for this box
-    if (params[:box][:type])
-      type = params[:box][:type]
-      if (type =~ /\dx\d/)
-        m = type.match(/(\d)x(\d)/)
+    if (params[:box][:box_layout])
+      layout = params[:box][:box_layout]
+      Rails.logger.debug "Building sqaures for box with layout = '#{layout}'"
+      if (layout =~ /\dx\d/)
+        m = layout.match(/(\d)x(\d)/)
         rows = m[1]
         cols = m[2]
-        (0..rows.to_i).each do |r|
-          (0..cols.to_i) do |c|
+        (1..rows.to_i).each do |r|
+          (1..cols.to_i).each do |c|
+            Rails.logger.debug "Building square for row: #{r}, col: #{c}"
             @box.squares << Square.new(:row => r, :column => c)
           end
         end
       end
+    else
+      Rails.logger.debug "No box layout in params: #{params}"
     end
     
     respond_to do |format|
@@ -78,14 +82,14 @@ class BoxesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_box
-      @box = Box.find(params[:id])
-    end
+private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_box
+    @box = Box.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def box_params
-      params.require(:box).permit(:label, :location_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def box_params
+    params.require(:box).permit(:label, :location_id, :box_layout)
+  end
 end

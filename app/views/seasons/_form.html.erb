@@ -28,6 +28,19 @@
     <%= form.text_field :harvest_date, id: :harvest_date %>
   </div>
 
+<% box_squares = Array.new() %>
+<% Box.all.each do |box| %>
+  <% box.squares.each do |square| %>
+    <% box_squares << h("Box: #{box.label}, Square: #{square.row},#{square.column}") %>
+  <% end %>
+<% end %>
+
+  <div class="field">
+    Box Square:<br>
+    <% select_squares = season.squares.map(&:id) unless (season.squares.nil?) %>
+    <%= collection_select(:season, :square_id, Square.all, :id, :name, {}, { :multiple => true }) %>
+  </div>
+
   <div class="field">
     <%= form.label :notes %>
     <%= form.text_area :notes, id: :notes %>

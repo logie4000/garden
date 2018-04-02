@@ -20,6 +20,11 @@
   <%= @season.harvest_date %>
 </p>
 
+<p>
+  <strong>Squares: </strong>
+  <%= square_list(@season) %>
+</p>
+
 
 <%= link_to 'Edit', edit_season_path(@season) %> |
 <%= link_to 'Back', seasons_path %>

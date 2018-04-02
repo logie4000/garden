@@ -1,0 +1,12 @@
+<div id="toolbar">
+<% if mode == "edit" %>
+ <%= link_to 'Show', box %> |
+<% elsif mode == 'show' %>
+ <%= link_to 'Edit', edit_box_path(box) %> |
+<% elsif mode == 'index' %>
+ <%= link_to 'New Crop', new_box_path %> |
+<% end %>
+
+ <%= link_to 'Crops List', boxes_path %>
+
+</div>

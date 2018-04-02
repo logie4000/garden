@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :label %>
-    <%= form.text_field :name, id: :box_label %>
+    <%= form.text_field :label, id: :box_label %>
   </div>
 
   <div class="field">
@@ -22,8 +22,8 @@
   </div>
 
   <div class="field">
-    Type:
-    <%= collection_select(:box, :box_type, ["3x3", "3x5", "4x4"], :to_s, :to_s) %> 
+    Box Layout:
+    <%= collection_select(:box, :box_layout, ["3x3", "3x5", "4x4"], :to_s, :to_s) %> 
   </div>
 
   <div class="actions">
