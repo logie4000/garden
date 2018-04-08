@@ -31,7 +31,7 @@ class BoxesController < ApplicationController
     # Create squares for this box
     if (params[:box][:box_layout])
       layout = params[:box][:box_layout]
-      Rails.logger.debug "Building sqaures for box with layout = '#{layout}'"
+      Rails.logger.debug "Building squares for box with layout = '#{layout}'"
       if (layout =~ /\dx\d/)
         m = layout.match(/(\d)x(\d)/)
         rows = m[1]
@@ -42,6 +42,9 @@ class BoxesController < ApplicationController
             @box.squares << Square.new(:row => r, :column => c)
           end
         end
+
+        params[:box][:rows] = rows
+        params[:box][:cols] = cols
       end
     else
       Rails.logger.debug "No box layout in params: #{params}"
@@ -61,6 +64,15 @@ class BoxesController < ApplicationController
   # PATCH/PUT /boxes/1
   # PATCH/PUT /boxes/1.json
   def update
+    if (params[:box][:box_layout])
+      layout = params[:box][:box_layout]
+      if (layout =~ /\dx\d/)
+        m = layout.match(/(\d)x(\d)/)
+        params[:box][:rows] = m[1]
+        params[:box][:cols] = m[2]
+      end
+    end
+
     respond_to do |format|
       if @box.update(box_params)
         format.html { redirect_to @box, notice: 'Box was successfully updated.' }
@@ -90,6 +102,6 @@ private
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def box_params
-    params.require(:box).permit(:label, :location_id, :box_layout)
+    params.require(:box).permit(:label, :location_id, :box_layout, :rows, :cols)
   end
 end

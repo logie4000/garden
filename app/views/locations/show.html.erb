@@ -24,4 +24,22 @@
   <%= render :partial => "shared/item_image", :locals => {:obj => @location, :img => @location.portrait} %>
   <%= render :partial => "shared/image_bucket", :locals => { :images => @images } %>
 </div>
-
+<% unless (@location.boxes.empty?) %>
+  <table>
+  <tr>
+  <% count = 0 %>
+  <% row_width = 3 %>
+  <% @location.boxes.each do |box| %>
+    <% count += 1 %>
+   <td<%= h(" align=right") if (count == row_width) %>>
+    <%= render :partial => "boxes/box_layout", :locals => {:box => box} %></td>
+    <% if (count >= row_width) %>
+      <% count = 0 %>
+      </tr><tr>
+    <% elsif (box.cols > 3) %>
+      <td>&nbsp;</td>
+    <% end %>
+  <% end %>
+  </tr>
+  </table>
+<% end %>

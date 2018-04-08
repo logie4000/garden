@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180402144520) do
+ActiveRecord::Schema.define(version: 20180403015144) do
 
   create_table "boxes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "label"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 20180402144520) do
     t.datetime "updated_at", null: false
     t.bigint "location_id"
     t.string "box_layout"
+    t.integer "rows"
+    t.integer "cols"
     t.index ["location_id"], name: "index_boxes_on_location_id"
   end
 

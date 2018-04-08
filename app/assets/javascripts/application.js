@@ -75,11 +75,7 @@ function addPortraitDropzoneById(dropUrl, dropElementId, dropParams, setPortrait
       url: dropUrl,
       uploadMultiple: false,
       paramName: 'file',
-<<<<<<< HEAD
       maxFilesize: 5,
-=======
-      maxFilesize: 1,
->>>>>>> origin/master
       addRemoveLinks: true,
       params: dropParams,
       init: function() {

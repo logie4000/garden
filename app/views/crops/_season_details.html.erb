@@ -3,6 +3,9 @@
 Start date: <%= season.start_date %><br>
 Transplant date: <%= season.transplant_date %><br>
 Harvest date: <%= season.harvest_date %><br>
-Box squares: <%= square_list(season) %>
+Box squares:
+  <%  season.squares.each do |square| %>
+    <%=  link_to square.name, box_path(square.box) %>
+  <% end %>
 </p>
 <hr width="60%">

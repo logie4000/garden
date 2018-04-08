@@ -1,0 +1,21 @@
+<div id="box_label" style="text-align:center;width:<%= h("#{(box.cols * 55)}px") %>"><%= h(box.label) %></div>
+<div class="box_layout" style="top:200px;width:<%= h("#{(box.cols * 55)}px") %>">
+<% current_row = 1%>
+<div class="box_row" style="float:left;height:54px">
+<% box.squares.each do |square| %>
+  <% if current_row != square.row %>
+    <% current_row = square.row %>
+    </div>
+    <div class="box_row" style="float:left;top:<%= h("#{((square.row - 1) * 55) + 2}px") %>;left:0px;height:55px;">
+  <% end %>
+  <div class="box_square" style="float:left;top:<%= h("#{((square.row - 1) * 55) + 2}px") %>;width:50px;height:51px;background-color:#dddddd;border:2px solid #dddddd">
+  <% if (square.seasons.empty?) %>
+    &nbsp;
+  <% else %>
+    <%= link_to( image_tag( square.current_season.crop.portrait.file.thumb.url ), square.current_season.crop ) %>
+  <% end %>
+  </div> 
+<% end %>
+</div>
+
+</div>

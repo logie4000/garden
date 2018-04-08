@@ -5,4 +5,11 @@ class Square < ApplicationRecord
   def name
     return "Box #{box.label}: #{self.row},#{self.column}"
   end
+
+  def current_season
+    if (self.seasons)
+      return self.seasons.first
+    end
+  end
+      
 end
