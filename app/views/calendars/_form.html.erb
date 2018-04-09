@@ -17,6 +17,18 @@
   </div>
 
   <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city, id: :calendar_name %>
+  </div>
+
+  <div>
+    <%= form.label :state %>
+    <%= collection_select(:calendar, :state, state_list, :to_s, :to_s) %>
+  </div>
+
+
+
+  <div class="field">
     <%= form.label :last_frost %>
     <%= form.text_field :last_frost, id: :calendar_last_frost %>
   </div>
