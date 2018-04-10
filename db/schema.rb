@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409151012) do
+ActiveRecord::Schema.define(version: 20180409162805) do
 
   create_table "boxes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "label"
@@ -115,6 +115,17 @@ ActiveRecord::Schema.define(version: 20180409151012) do
     t.datetime "updated_at", null: false
     t.integer "is_admin", default: 0
     t.string "api_key"
+  end
+
+  create_table "weather_data", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.text "raw"
+    t.string "date"
+    t.string "city"
+    t.string "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["date", "state", "city"], name: "index_weather_data_on_date_and_state_and_city", unique: true
+    t.index ["date"], name: "index_weather_data_on_date"
   end
 
   add_foreign_key "boxes", "locations"

@@ -15,5 +15,22 @@
   <%= @calendar.last_frost %>
 </p>
 
+<% unless (@weather_data.empty?) %>
+  <p>
+    <strong>Recent Weather Data</strong>
+    <table>
+      <tr><th>Date</th><th>High</th><th>Low</th><th>Precip.</th></tr>
+    <% @weather_data.each do |data| %>
+      <tr>
+        <td><%= h("#{data[:date]}") %></td>
+        <td><%= h("#{data.max_temp(UNIT_IMPERIAL)} F") %></td>
+        <td><%= h("#{data.min_temp(UNIT_IMPERIAL)} F") %></td>
+        <td><%= h("#{data.precip(UNIT_IMPERIAL)}\"") %></td>
+      </tr>
+    <% end %>
+    </table>
+  </p>
+<% end %>
+
 <%= link_to 'Edit', edit_calendar_path(@calendar) %> |
 <%= link_to 'Back', calendars_path %>

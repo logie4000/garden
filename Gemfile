@@ -52,6 +52,12 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+
+  gem 'mocha'
+  gem 'ci_reporter_minitest'
+  # Do not allow 5.10.2 or later of minitest until Rails 5.1+
+  gem 'minitest'
+
 end
 
 group :development do

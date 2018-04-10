@@ -2,8 +2,6 @@
 
 one:
   file: MyString
-  imagable: one
 
 two:
   file: MyString
-  imagable: two

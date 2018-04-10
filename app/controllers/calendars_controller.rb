@@ -1,7 +1,10 @@
+require 'weather.rb'
+
 class CalendarsController < ApplicationController
   before_action :authorize, only: [:new, :create, :edit, :update]
   before_action :authorize_as_admin, only: [:destroy]
   before_action :set_calendar, only: [:show, :edit, :update, :destroy]
+  before_action :get_weather_data, only: [:show]
 
   # GET /calendars
   # GET /calendars.json
@@ -72,5 +75,33 @@ class CalendarsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def calendar_params
       params.require(:calendar).permit(:name, :last_frost, :city, :state)
+    end
+
+    def get_weather_data
+      set_calendar
+      @weather_data = Array.new()
+
+      if (@calendar.city && @calendar.state)
+        city = @calendar.city
+        state = @calendar.state
+        today = Date.today
+
+        # Don't grab today's data, as it may be incomplete
+        (1..30).each do |d|
+          day = today - d
+          data = WeatherDatum.where(:date => day.to_s, :city => city, :state => state).take
+
+          unless (data)
+            json = Weather.get_date_summary(day.to_s, city, state)
+
+            if (json)
+              data = WeatherDatum.new(:raw => json.to_json, :date => day.to_s, :city => city, :state => state)
+              data.save
+            end
+          end
+
+          @weather_data << data if (data)
+        end
+      end
     end
 end

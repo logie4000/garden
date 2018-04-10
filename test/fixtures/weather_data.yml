@@ -1,0 +1,22 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  raw: '{
+  "response": {
+  "version":"0.1",
+  "termsofService":"http://www.wunderground.com/weather/api/d/terms.html",
+  "features": {
+  "history": 1
+  }
+ }
+}' 
+  date: '2018-03-01'
+  city: 'Williamstown'
+  state: 'MA'
+
+two:
+  raw: '{"date":{"pretty":"12:52 AM EDT on April 09, 2018","year":"2018","mon":"04","mday":"09","hour":"00","min":"52","tzname":"America/New_York"},"fog":"0","rain":"0","snow":"1","snowfallm":"","snowfalli":"","monthtodatesnowfallm":"","monthtodatesnowfalli":"","since1julsnowfallm":"","since1julsnowfalli":"","snowdepthm":"","snowdepthi":"","hail":"0","thunder":"0","tornado":"0","meantempm":"-1","meantempi":"31","meandewptm":"-10","meandewpti":"14","meanpressurem":"1019.99","meanpressurei":"30.12","meanwindspdm":"12","meanwindspdi":"7","meanwdire":"WNW","meanwdird":"288","meanvism":"14.9","meanvisi":"9.2","humidity":"52","maxtempm":"3","maxtempi":"39","mintempm":"-5","mintempi":"23","maxhumidity":"81","minhumidity":"32","maxdewptm":"-7","maxdewpti":"20","mindewptm":"-13","mindewpti":"8","maxpressurem":"1022","maxpressurei":"30.19","minpressurem":"1017","minpressurei":"30.03","maxwspdm":"20","maxwspdi":"13","minwspdm":"0","minwspdi":"0","maxvism":"16.1","maxvisi":"10.0","minvism":"3.2","minvisi":"2.0","gdegreedays":"0","heatingdegreedays":"34","coolingdegreedays":"0","precipm":"0.0","precipi":"0.00","precipsource":"3Or6HourObs","heatingdegreedaysnormal":"","monthtodateheatingdegreedays":"","monthtodateheatingdegreedaysnormal":"","since1sepheatingdegreedays":"","since1sepheatingdegreedaysnormal":"","since1julheatingdegreedays":"","since1julheatingdegreedaysnormal":"","coolingdegreedaysnormal":"","monthtodatecoolingdegreedays":"","monthtodatecoolingdegreedaysnormal":"","since1sepcoolingdegreedays":"","since1sepcoolingdegreedaysnormal":"","since1jancoolingdegreedays":"","since1jancoolingdegreedaysnormal":""}'
+  date: '2018-04-01'
+  city: 'Williamstown'
+  state: 'MA'
+
