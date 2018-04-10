@@ -84,24 +84,25 @@ class CalendarsController < ApplicationController
       if (@calendar.city && @calendar.state)
         city = @calendar.city
         state = @calendar.state
-        today = Date.today
+        yesterday = Date.yesterday
+        dt_start = Date.parse("2018-03-01")
 
         # Don't grab today's data, as it may be incomplete
-        (1..30).each do |d|
-          day = today - d
-          data = WeatherDatum.where(:date => day.to_s, :city => city, :state => state).take
+        (dt_start..yesterday).each do |d|
+          day = d.to_s
+          data = WeatherDatum.where(:date => day, :city => city, :state => state).take
 
           unless (data)
-            json = Weather.get_date_summary(day.to_s, city, state)
+            json = Weather.get_date_summary(day, city, state)
 
             if (json)
-              data = WeatherDatum.new(:raw => json.to_json, :date => day.to_s, :city => city, :state => state)
+              data = WeatherDatum.new(:raw => json.to_json, :date => day, :city => city, :state => state)
               data.save
             end
           end
-
-          @weather_data << data if (data)
         end
+
+        @weather_data = WeatherDatum.where(:city => city, :state => state).all
       end
     end
 end

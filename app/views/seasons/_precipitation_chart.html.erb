@@ -1,0 +1,31 @@
+<% right_width = planted_days(season) %>
+<% left_width = planting_offset(season) %>
+<% day_width ||= 7 %>
+<% chart_height ||= 125 %>
+
+<% dt_start = Date.parse(season.start_date) %>
+<% padding = (dt_start - growing_season_start).to_i %>
+<% total_width = right_width + left_width + padding %>
+<% max_width = (growing_season_end - dt_start) + padding %>
+<% total_width = max_width if (total_width > max_width) %>
+<% title ||= season.crop.name %>
+
+<% weather_data = Array.new() %>
+<% if (Date.today > dt_start) %>
+  <% (dt_start..Date.today).each do |d| %>
+    <% wd = WeatherDatum.where(:date => d, :city => season.crop.city(), :state => season.crop.state()).take %>
+    <% weather_data << wd unless (wd.nil?) %>
+  <% end %>
+
+  <div style='<%= "height: #{chart_height}px;width:100%; white-space: nowrap;" -%>' >
+  <div style='height: <%= h("#{chart_height}px") %>;text-align:right;padding-right:7px;font-size:10px;float:left;<%= "width:#{125 + ((padding - 5) * day_width)}px" %>;white-space: nowrap;'>&nbsp;</div>
+  <div class='precipitationChart' style='<%= "float:left;height: #{chart_height}px;width: #{(total_width - padding + 5) * day_width}px; white-space: nowrap;" -%>'>
+    <%= render :partial => "shared/precipitation_chart", :locals => {:weather_data => weather_data, :height => "#{chart_height}px", :width => "#{(total_width - padding + 7) * day_width}px", :show_legend => false, :discrete_axes => true} %>
+  </div>
+
+<% end %>
+
+<% if (show_crop) %>
+  <%= render :partial => "shared/planningBar2", :locals => {:start_date => dt_start, :total_width => total_width, :padding =>  padding, :left_width => left_width, :right_width => right_width, :title => title } %>
+<% end %>
+</div>

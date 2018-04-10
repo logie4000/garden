@@ -52,14 +52,6 @@ class WeatherTest < ActiveSupport::TestCase
     assert_equal JSON.parse(expected), result
   end
 
-  test "retrieve correct data from model" do
-    data = weather_data(:two)
-    expected = "39"
-    result = data.max_temp(UNIT_IMPERIAL)
-
-    assert_equal expected, result
-  end
-
   test "generate correct history url" do
     result = Weather.generate_history_url("2018-03-02", "Williamstown", "MA")
     expected = "history_20180302/q/MA/Williamstown.json"

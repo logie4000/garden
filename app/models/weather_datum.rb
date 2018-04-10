@@ -8,19 +8,19 @@ class WeatherDatum < ApplicationRecord
   SNOWFALL = "snowfall"
 
   def max_temp(unit = UNIT_METRIC)
-    return self.get(MAX_TEMP, unit)
+    return self.get(MAX_TEMP, unit).to_i
   end
 
   def min_temp(unit = UNIT_METRIC)
-    return self.get(MIN_TEMP, unit)
+    return self.get(MIN_TEMP, unit).to_i
   end
 
   def precip(unit = UNIT_METRIC)
-    return self.get(PRECIP, unit)
+    return self.get(PRECIP, unit).to_f
   end
 
   def snowfall(unit = UNIT_METRIC)
-    return self.get(SNOWFALL, unit)
+    return self.get(SNOWFALL, unit).to_f
   end
 
   def get(attr, unit = UNIT_METRIC)

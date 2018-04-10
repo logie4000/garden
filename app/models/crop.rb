@@ -81,4 +81,11 @@ class Crop < ApplicationRecord
     self.transplant_offset = weeks * 7
   end
 
+  def city
+    return self.location.calendar.city
+  end
+
+  def state
+    return self.location.calendar.state
+  end
 end

@@ -1,0 +1,11 @@
+<% width ||= "95%" %>
+<% height ||= "300px" %>
+<% show_points = false if (show_points.nil?) %>
+<% show_legend = false if (show_legend.nil?) %>
+<% discrete_axes = false if (discrete_axes.nil?) %>
+
+<% color ||= ["#00FF00"] %>
+
+<%= column_chart [{ name: "Precipitation", data: weather_data.map { |data| [data[:date], data.precip(UNIT_IMPERIAL)] },
+   },
+  ], colors: color, width: width, height: height, discrete: discrete_axes, legend: show_legend %>

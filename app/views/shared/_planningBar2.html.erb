@@ -1,6 +1,6 @@
-<% bar_height = 15 %>
-<% day_width = 7 %>
-<% gap_width = 2 %>
+<% bar_height ||= 15 %>
+<% day_width ||= 7 %>
+<% gap_width ||= 2 %>
 <% start_date ||= DateTime.parse(DEFAULT_LAST_FROST) %>
 <% right_color ||= "#997d00" %>
 <% left_color ||= "#48ec00" %>

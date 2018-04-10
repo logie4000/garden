@@ -9,6 +9,10 @@
 
 <div style="width: 2000px; height: 100%; overflow: auto;">
  <table class="growth_chart" style="width:100%;">
+    <tr><td>
+      <%= render :partial => "temperature_chart", :locals => { :crop => @crops.first, :show_crop => false } %>
+    </td></tr>
+
     <% @crops.each do |crop| %>
       <% next if crop.get_actual_start_datetime() > growing_season_end %>
       <tr><td>

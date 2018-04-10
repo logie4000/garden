@@ -13,6 +13,8 @@
 //= require rails-ujs
 //= require jquery
 //= require dropzone
+//= require Chart.bundle
+//= require chartkick
 // require_tree .
 //
 

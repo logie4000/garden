@@ -56,6 +56,7 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
+    chartkick (2.3.4)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     ci_reporter (2.0.0)
@@ -213,6 +214,7 @@ DEPENDENCIES
   byebug
   capybara (~> 2.13)
   carrierwave (~> 0.10.0)
+  chartkick
   ci_reporter_minitest
   coffee-rails (~> 4.2)
   jbuilder (~> 2.5)

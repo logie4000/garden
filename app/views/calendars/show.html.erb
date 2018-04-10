@@ -18,6 +18,9 @@
 <% unless (@weather_data.empty?) %>
   <p>
     <strong>Recent Weather Data</strong>
+    <%= render :partial => "shared/temperature_chart", :locals => {:weather_data => @weather_data} %>
+    <%= render :partial => "shared/precipitation_chart", :locals => {:weather_data => @weather_data} %>
+
     <table>
       <tr><th>Date</th><th>High</th><th>Low</th><th>Precip.</th></tr>
     <% @weather_data.each do |data| %>
