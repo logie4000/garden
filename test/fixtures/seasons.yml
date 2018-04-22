@@ -1,17 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  crop: one
-  start_date: MyString
-  transplant_date: MyString
+radish:
+  crop_id: 3
+  start_date: 2018-03-31
+  transplant_date: 
   transplant: false
-  harvest_date: MyString
-  notes: MyText
+  harvest_date: 
+  notes: Radish notes
 
-two:
-  crop: two
-  start_date: MyString
-  transplant_date: MyString
-  transplant: false
-  harvest_date: MyString
-  notes: MyText
+tomato:
+  crop: 1
+  start_date: 2018-03-01
+  transplant_date: 2018-05-20
+  transplant: true
+  harvest_date: 
+  notes: Tomatoe notes

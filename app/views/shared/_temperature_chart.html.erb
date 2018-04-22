@@ -3,13 +3,18 @@
 <% show_points = false if (show_points.nil?) %>
 <% show_legend = true if (show_legend.nil?) %>
 <% discrete_axes = false if (discrete_axes.nil?) %>
+<% include_observations = false if (include_observations.nil?) %>
 
 <% colors ||= ["#FF0000", "#0000FF", "#101010"] %>
 
-   <%= line_chart [{ name: "High Temp",
-     data: weather_data.map { |data| [data[:date], data.max_temp(UNIT_IMPERIAL)] },
-   }, { name: "Low Temp",
-     data: weather_data.map { |data| [data[:date], data.min_temp(UNIT_IMPERIAL)] },
-   }, { name: "", data: weather_data.map { |data| [data[:date], 32] },
-} ], colors: colors, width: width, height: height, points: show_points, legend: show_legend, discrete: discrete_axes %>
+<% chart_data = [{ name: "High Temp",
+      data: weather_data.map { |data| [data[:date], data.max_temp(UNIT_IMPERIAL)] },
+    }, { name: "Low Temp",
+      data: weather_data.map { |data| [data[:date], data.min_temp(UNIT_IMPERIAL)] },
+    }, { name: "", data: weather_data.map { |data| [data[:date], 32] },
+   }]
+%>
+
+   <%= line_chart chart_data, colors: colors, width: width, height: height,
+      points: show_points, legend: show_legend, discrete: discrete_axes %>
 

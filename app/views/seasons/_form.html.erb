@@ -38,7 +38,7 @@
   <div class="field">
     Box Square:<br>
     <% select_squares = season.squares.map(&:id) unless (season.squares.nil?) %>
-    <%= collection_select(:season, :square_id, Square.all, :id, :name, {}, { :multiple => true }) %>
+    <%= collection_select(:season, :square_id, Square.all, :id, :name, { :selected => select_squares }, { :multiple => true }) %>
   </div>
 
   <div class="field">

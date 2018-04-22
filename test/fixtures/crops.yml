@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 tomato:
+  id: 1
   name: Tomato 
   start_date: <%= TEXT_BEFORE_TRANSPLANT %>
   transplant: true
@@ -11,6 +12,7 @@ tomato:
   days_to_maturity: 55
 
 basil:
+  id: 2
   name: Basil
   start_date: <%= TEXT_BEFORE_TRANSPLANT %>
   transplant: true
@@ -21,6 +23,7 @@ basil:
   days_to_maturity: 55
 
 radish:
+  id: 3
   name: Radish
   start_date: <%= TEXT_BEFORE_LAST_FROST %>
   transplant: false

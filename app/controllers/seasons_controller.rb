@@ -47,6 +47,16 @@ class SeasonsController < ApplicationController
     end
 
     @season = Season.new(season_params)
+    @season.squares = Array.new()
+
+    if (params[:season][:square_id])
+      params[:season][:square_id].each do |square_id|
+        next if (square_id.blank?)
+
+        square = Square.find(square_id)
+        @season.squares << square
+      end
+    end
 
     respond_to do |format|
       if @season.save
@@ -67,8 +77,11 @@ class SeasonsController < ApplicationController
     end
 
     if (params[:season][:square_id])
+      @season.squares.clear
+
       params[:season][:square_id].each do |square_id|
         next if (square_id.blank?)
+      
         square = Square.find(square_id)
         @season.squares << square
       end

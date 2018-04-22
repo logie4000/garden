@@ -12,7 +12,8 @@
   <% if (square.seasons.empty?) %>
     &nbsp;
   <% else %>
-    <%= link_to( image_tag( square.current_season.crop.portrait.file.thumb.url ), square.current_season.crop ) %>
+    <% current_season = square.current_season %>
+    <%= link_to( image_tag( current_season.crop.portrait.file.thumb.url ), current_season.crop ) if (current_season) %>
   <% end %>
   </div> 
 <% end %>
