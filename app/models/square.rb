@@ -27,5 +27,27 @@ class Square < ApplicationRecord
 
     return cur_season
   end
-      
+     
+
+  def next_planned_season
+    next_season = nil
+    if (self.seasons)
+      earliest_date = Date.parse("2018-03-01") + 365
+      self.seasons.each do |season|
+        if (season.transplant?)
+          if (season.transplant_date.empty?)
+            dt = season.crop.get_transplant_datetime
+            next_season = season if (dt > Date.today && dt <= earliest_date)
+          end
+        else
+          if (season.start_date.empty?)
+            dt = season.crop.get_start_datetime
+            next_season = season if (dt > Date.today && dt <= earliest_date)
+          end
+        end
+      end
+    end
+
+    return next_season
+  end 
 end

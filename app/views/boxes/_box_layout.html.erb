@@ -13,7 +13,14 @@
     &nbsp;
   <% else %>
     <% current_season = square.current_season %>
-    <%= link_to( image_tag( current_season.crop.portrait.file.thumb.url ), current_season.crop ) if (current_season) %>
+    <% next_season = square.next_planned_season %>
+    <% if (current_season) %>
+      <%= link_to( image_tag( current_season.crop.portrait.file.thumb.url ), current_season.crop ) %>
+    <% elsif next_season %>
+      <div style="font-size: 10px;">
+      <%= link_to( next_season.crop.name, next_season.crop ) %>
+      </div>
+    <% end %>
   <% end %>
   </div> 
 <% end %>

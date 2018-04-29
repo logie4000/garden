@@ -16,6 +16,6 @@ class Season < ApplicationRecord
   end
 
   def transplant?
-    return self.transplant
+    return self.crop.transplant?
   end
 end
