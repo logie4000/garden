@@ -37,12 +37,12 @@ module SeasonsHelper
       dt_start = Date.parse(season.start_date)
     end
 
-    if (season.crop.transplant ||  !season.transplant.blank?)
-      if (season.transplant.blank?)
+    if (season.crop.transplant ||  !season.transplant_date.blank?)
+      if (season.transplant_date.blank?)
         return (Date.today - dt_start).to_i if (Date.today > dt_start)
       else
         dt_transplant = Date.parse(season.transplant_date)
-        return (dt_transplant - dt_start) if (dt_start > dt_transplant)
+        return (dt_transplant - dt_start).to_i if (dt_transplant > dt_start)
       end
     end
 
