@@ -37,12 +37,14 @@ class Square < ApplicationRecord
         if (season.transplant?)
           if (season.transplant_date.empty?)
             dt = season.crop.get_transplant_datetime
-            next_season = season if (dt > Date.today && dt <= earliest_date)
+            next_season = season if (dt <= earliest_date)
+            earliest_date = dt
           end
         else
           if (season.start_date.empty?)
             dt = season.crop.get_start_datetime
-            next_season = season if (dt > Date.today && dt <= earliest_date)
+            next_season = season if (dt <= earliest_date)
+            earliest_date = dt
           end
         end
       end

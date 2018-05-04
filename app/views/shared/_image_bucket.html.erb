@@ -1,6 +1,10 @@
 <div id="image_bucket">
 <% images.each do |img| %>
- <a href="#" onClick="swap_img('portrait', '/garden_planner<%= j(img.file.normal.url) -%>')"><%= image_tag(img.file.thumb.url) -%></a>&nbsp;
+  <% if (obj.class.name == "Crop") %>
+    <%= link_to(image_tag(img.file.thumb.url), set_portrait_crop_path(obj, :authenticity_token => form_authenticity_token, :image_id => img.id), :remote => true, :method => :patch)  -%></a>&nbsp;
+  <% elsif (obj.class.name == "Location") %>
+    <%= link_to(image_tag(img.file.thumb.url), set_portrait_location_path(obj, :authenticity_token => form_authenticity_token, :image_id => img.id), :remote => true, :method => :patch)  -%></a>&nbsp;
+  <% end %>
 <% end %>
 </div>
 

@@ -13,6 +13,8 @@ class CropsController < ApplicationController
   # GET /crops/1.json
   def show
     @images = @crop.images
+    Rails.logger.debug("Rendering crop: #{@crop.inspect}")
+    Rails.logger.debug("Rendering portrait: #{@crop.portrait.inspect}")
   end
 
   # GET /crops/new
@@ -103,14 +105,19 @@ class CropsController < ApplicationController
 
   def set_portrait
     if (params[:image_id])
-      Rails.logger.debug("Adding portrait with image_id = #{params[:image_id]}")
-      @portrait = Image.find(params[:image_id])
+      old_portrait = @crop.portrait
+      Rails.logger.debug("Changing portrait for crop: #{@crop.inspect}")
+      Rails.logger.debug("Swapping out old portrait: #{old_portrait.inspect}")
+      @portrait = Image.find(params[:image_id]) 
+      Rails.logger.debug("Adding new portrait: #{@portrait.inspect}")
+
       @crop.portrait = @portrait
     end
 
     respond_to do |format|
       @crop.save!
       format.json { render :json => @crop.portrait }
+      format.js
     end
   end
 

@@ -1,0 +1,2 @@
+console.log("Setting portrait image to ID <%= @crop.portrait.id %>");
+document.getElementById("portrait").innerHTML="<%= j( render :partial => 'shared/item_image', :locals => { :obj => @crop, :img => @crop.portrait } ) %>";

@@ -99,7 +99,7 @@ function addPortraitDropzoneById(dropUrl, dropElementId, dropParams, setPortrait
               url: "" + setPortraitUrl,
               dataType:'text',
               data: "image_id=" + response.id + "&authenticity_token=" + AUTH_TOKEN,
-              type: 'POST'
+              type: 'PATCH'
             });
           }
         });

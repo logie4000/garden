@@ -1,7 +1,7 @@
 class LocationsController < ApplicationController
   before_action :authorize, only: [:new, :create, :edit, :update]
   before_action :authorize_as_admin, only: [:destroy]
-  before_action :set_location, only: [:show, :edit, :update, :destroy]
+  before_action :set_location, only: [:show, :edit, :set_portrait, :update, :destroy]
 
   # GET /locations
   # GET /locations.json
@@ -61,6 +61,24 @@ class LocationsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to locations_url, notice: 'Location was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def set_portrait
+    if (params[:image_id])
+      old_portrait = @location.portrait
+      Rails.logger.debug("Changing portrait for location: #{@location.inspect}")
+      Rails.logger.debug("Swapping out old portrait: #{old_portrait.inspect}")
+      @portrait = Image.find(params[:image_id])
+      Rails.logger.debug("Adding new portrait: #{@portrait.inspect}")
+
+      @location.portrait = @portrait
+    end
+
+    respond_to do |format|
+      @location.save!
+      format.json { render :json => @location.portrait }
+      format.js
     end
   end
 

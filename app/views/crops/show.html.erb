@@ -55,7 +55,7 @@
 </div>
 
 <div id="item_image">
-  <%= render :partial => "shared/item_image", :locals => {:obj => @crop, :img => @crop.portrait } %>
-  <%= render :partial => "shared/image_bucket", :locals => { :images => @images, :refresh_url => refresh_images_crop_path(@crop) } %>
+<div id="portrait">  <%= render :partial => "shared/item_image", :locals => {:obj => @crop, :img => @crop.portrait } %> </div>
+<div id=image_bucket">  <%= render :partial => "shared/image_bucket", :locals => { :obj => @crop, :images => @images, :refresh_url => refresh_images_crop_path(@crop) } %> </div>
 </div>
 

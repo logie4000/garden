@@ -2,7 +2,7 @@ class Crop < ApplicationRecord
   belongs_to :location
   has_many :seasons
   has_many :images, as: :imageable
-  has_one :portrait, :class_name => "Image", as: :imageable
+  belongs_to :portrait, :class_name => "Image", :optional => true
   
   mount_uploader :image, ImageUploader
 

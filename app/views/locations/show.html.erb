@@ -21,8 +21,8 @@
 </p>
 </div>
 <div id="item_image">
-  <%= render :partial => "shared/item_image", :locals => {:obj => @location, :img => @location.portrait} %>
-  <%= render :partial => "shared/image_bucket", :locals => { :images => @images } %>
+<div id="portrait"><%= render :partial => "shared/item_image", :locals => {:obj => @location, :img => @location.portrait} %></div>
+<div id="image_bucket"><%= render :partial => "shared/image_bucket", :locals => { :obj => @location, :images => @images } %></div>
 </div>
 <% unless (@location.boxes.empty?) %>
   <table>
