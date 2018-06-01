@@ -18,7 +18,9 @@
         <td><%= calendar.last_frost %></td>
         <td><%= link_to 'Show', calendar %></td>
         <td><%= link_to 'Edit', edit_calendar_path(calendar) %></td>
-        <td><%= link_to 'Destroy', calendar, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+       <% if (@current_user && @current_user.is_admin?) %>
+         <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+       <% end %>
       </tr>
     <% end %>
   </tbody>

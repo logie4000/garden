@@ -14,12 +14,12 @@ class Square < ApplicationRecord
         if (season.transplant?)
           unless (season.transplant_date.empty?)
             dt = Date.parse(season.transplant_date)
-            cur_season = season if (dt <= Date.today && dt > latest_date)
+            cur_season = season if (dt <= Date.today && dt > latest_date && season.harvest_date.empty?)
           end
         else
           unless (season.start_date.empty?)
             dt = Date.parse(season.start_date)
-            cur_season = season if (dt <= Date.today && dt > latest_date)
+            cur_season = season if (dt <= Date.today && dt > latest_date && season.harvest_date.empty?)
           end
         end
       end

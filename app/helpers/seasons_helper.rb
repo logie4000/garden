@@ -5,11 +5,17 @@ module SeasonsHelper
   end
 
   def planted_days(season)
+    dt_end = Date.today
+    unless (season.harvest_date.blank?)
+      dt_harvest = Date.parse(season.harvest_date)
+      dt_end = ( dt_harvest > Date.today ? Date.today : dt_harvest )
+    end 
+     
     if (season.crop.transplant)
       unless (season.transplant_date.blank?)
         dt_transplant = Date.parse(season.transplant_date)
-        if (Date.today > dt_transplant)
-          return (Date.today - dt_transplant).to_i
+        if (dt_end > dt_transplant)
+          return (dt_end - dt_transplant).to_i
         else
           return 0 # Transplant, transplant date is greater than today
         end
@@ -19,8 +25,8 @@ module SeasonsHelper
     else
       unless (season.start_date.blank?)
         dt_start = Date.parse(season.start_date)
-        if (Date.today > dt_start)
-          return (Date.today - dt_start).to_i
+        if (dt_end > dt_start)
+          return (dt_end - dt_start).to_i
         else
           return 0 # Not a transplant, season start date is greater than today
         end
