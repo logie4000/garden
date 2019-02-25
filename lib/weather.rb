@@ -13,14 +13,19 @@ module Weather
                 :headers => {:content_type => :json, :accept => :json})
 
     result = request.execute
-#    Rails.logger.debug "Result: #{result.inspect}"
+    Rails.logger.debug "Result: #{result.inspect}"
 
-    response_json = JSON.parse(result)
-#    Rails.logger.debug "Result: #{response_json.inspect}"
+    begin
+      response_json = JSON.parse(result)
+#     Rails.logger.debug "Result: #{response_json.inspect}"
 
-    if (Weather.valid_summary?(response_json))
-      return response_json['history']['dailysummary'][0] 
-    else
+      if (Weather.valid_summary?(response_json))
+        return response_json['history']['dailysummary'][0] 
+      else
+        return nil
+      end
+    rescue StandardError => e
+      Rails.logger.debug("Unable to parse weather data: #{e.message}")
       return nil
     end
   end
